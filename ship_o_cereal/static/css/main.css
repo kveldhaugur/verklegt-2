@@ -1,15 +1,5 @@
-
 body {
 	background-color: #efeefd;
-}
-footer {
-	position: fixed;
-	width: 100%;
-	left: 0;
-	bottom: 0;
-	background-color: #6862f1;
-	text-align: center;
-	color: white;
 }
 
 .main_logo {
@@ -42,3 +32,38 @@ footer {
 	border-color: white;
 	color: #6862f1;
 }
+.text-before-product{
+	margin-top: 4rem;
+	border-bottom: 3px solid #6862f1;
+	line-height: 0;
+	text-align: center;
+
+}
+.text-before-product span {
+	background-color: #efeefd;
+	padding: 0 10px;
+	color: #6862f1;
+	font-weight: bolder;
+	font-size: 1.5rem;
+
+}
+footer {
+	position: fixed; /*Tekið út þegar síðan er ready*/
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	background-color: #6862f1;
+	text-align: center;
+	color: white;
+}
+.footer-text {
+	display: flex;
+	justify-content: space-between;
+
+}
+
+.footer-copyright {
+	font-size: small;
+	font-weight: lighter;
+}
+
