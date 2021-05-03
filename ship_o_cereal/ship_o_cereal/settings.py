@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main.apps.MainConfig'
 ]
 
 MIDDLEWARE = [
@@ -73,13 +74,14 @@ WSGI_APPLICATION = 'ship_o_cereal.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-GS_BUCKET_NAME = 'verk2-bucket-1'
-STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 DATABASES = {
     'default': {
-        'ENGINE': DEFAULT_FILE_STORAGE,
-        'GS_BUCKET_NAME' : GS_BUCKET_NAME
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ship-o-cereal',
+        'USER': 'ship-o-user',
+        'PASSWORD': 'verk2pass',
+        'HOST': '34.105.220.204',
+        'PORT': '5432'
     }
 }
 
@@ -126,5 +128,3 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-print(default_storage)
