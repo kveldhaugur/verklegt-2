@@ -1,3 +1,43 @@
-.shipocereal_test {
-    background: mediumpurple;
+
+body {
+	background-color: #efeefd;
+}
+footer {
+	position: fixed;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	background-color: #6862f1;
+	text-align: center;
+	color: white;
+}
+
+.main_logo {
+	max-width: 13rem;
+}
+
+.main_profile {
+	max-width: 3rem;
+	margin-left: 1rem;
+}
+
+.navbar {
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+}
+
+.container-fluid {
+	background-color: white;
+}
+
+.btn-outline-success {
+	background-color: #efeefd;
+	color: #6862f1;
+	border-color: white;
+}
+
+.form-control {
+	background-color: #efeefd;
+	border-color: white;
+	color: #6862f1;
 }
