@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "verk2-shipocereal",
+  "private_key_id": "131803b11021b350b60b98e67cfeef883edc1f98",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCk63qTHQ257awZ\nzza1wNfV44S1mkav8tW27T6R45h8lzBzwwKWvStXSpnf9l8BDvWa9lHVzW9JoocZ\nVyu0aotQfdXrbusTkix+dWp/xyZFTPrc11WWbZ83+kJNmEDuSpADkIOd5Ygki6M2\nL1esFr888Ai8eOqoZaUWtEJvCFrEDJyB17JPM0gV+qWqSTy3WKcepBhiaout5bKx\nkAN3MF5EOM9SxIUC0yw0MVfbxNYKNW3wU/cRRrlGhWEemxV1YzzOvYsJvPiMaMiu\nTA3vu0viO3GYaPm1B1R7hPp7ZIyMDWbwGUyLiaMPcI30Fcc0OjMA/tjWzIsMPC2b\nUPMjsKE1AgMBAAECggEAHLyJXbP8zc57o/2mx1HEahkcaTZqJcN2+MprEimpyt/f\nSfSLcW+h6zJtEIjR8hHEuw07ojkLMLX4u3Ikg+niv5JFoaHwpTbduOVFuuEdKoso\n1S1SVQVh7nOVdQbYHY1xfaWDQZKav99y/4CNUsed6ATdSNX68X/Qnd2oC8fVZP6T\nxY/i4s3zfk1wpm4uv5w0/L75Jo4cFnpIUZH0pMWCIA5XPCbiaf9keXn++y+6sNFz\nrCAYKgKI4LEK1W6E6kPvq8POl6bB/PyVVieCvAyXPmXj7KrxtFrxFT3Zi8Gf745B\n8l3awCWB6+FmrPrMPAc/TT21xnjCiZc014BdWGWVkQKBgQDc4SoPfzag5sTZ2EJT\nsbu2TIg05eB3UkryeasQX2nlDN3Qny0r1v9L4VRpCRJvrmgSxddoWhxRydweMz0V\nlmg8iBGjeOcObYEd5o5Oeet3pugtfdu/B8TS4w5CYKpEE4upUt1d7x5LmAhKlDmH\ngJccBSm+oZ6AjeSwMdHQ6Nej6QKBgQC/JH3JT4w+WmZGlUoruxBM7OBtgEFAipV5\n3QdjxVSX6nxP/RXT+oBqWlzIU90NbRgkYAlkCnc4qY36dzZyXQ+9LNMD/hHVjALA\nc/Jo51yjzGBoJnVeSr3T8XbB7qaEeqeSFlboxWpo6PUXK1MowtB3msv3fV1Ga21I\nEHWwI82/bQKBgQCZdcMAQ1VUEyE/bVYfygNuE9wqTHBY1o8FymyEkpYDMp5GHOGI\nbPaw5Jv94fSyLU1Xhac0dC7q0EGjpdvRzM8dBziiCBUYXBJyEMZcVa64UflL6f6r\nyZ0BHAnDKmABrkbBXLY6VjEJOlbAYh1aPIhASoIHVUjHbk4t8F8jMzLnSQKBgQCA\nsjM3PiYxPXCriY0dEKCTCtK5J6fHqwelu5pkJNMmTi1RNhhiV8Hq2diq0Tx+87tT\nko4AG8PWFOORhn7UVbBpMSsK/yBG5jRcHDVVSKHpb4xh07Mmv7A8adIKFYNso6D8\nDaqKo5FX/bI33WXqhfES9tjqVDBfX6l+4gY7iH/ZqQKBgHfEguV3H3jcOJCyYOLc\nsA2Qm9zwXJlEzISYCdcbiDtj2p/iOhNN9odPxK6Lx9v7BBptzx6pfVRPosHIrBOB\nTxiT0i7jwRtGxxBiTAeLNpX3d9SK9kkbXEuti7kxg2MjpJhfB1YEb7F3ehLVOoVD\n34rKg+voZ7vhbh3CAEml3vk1\n-----END PRIVATE KEY-----\n",
+  "client_email": "verk2-admin@verk2-shipocereal.iam.gserviceaccount.com",
+  "client_id": "106473470480601941989",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/verk2-admin%40verk2-shipocereal.iam.gserviceaccount.com"
+}
