@@ -9,11 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-<<<<<<< HEAD
 from django.core.files.storage import default_storage
-=======
 import os
->>>>>>> origin/test
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
