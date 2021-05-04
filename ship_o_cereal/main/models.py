@@ -36,6 +36,7 @@ class Account(models.Model):
     AccountName = models.CharField(max_length=255)
     AccountPass = models.CharField(max_length=255)
     ProfilePic = models.CharField(max_length=255)
+    DateOfBirth = models.DateTimeField(auto_now=False, null=True)
 
 
 class UserInfo(models.Model):
