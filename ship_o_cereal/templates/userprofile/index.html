@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div>
+        <img src="/static/images/profilepic_darker.png" alt="Here is the profile pic">
+        <p>Change Image</p>
+        <h1>Account Overview</h1>
+    </div>
+    <div class="user-info-container">
+        <div class="user-info-box">
+            <h3>Profile</h3>
+            <p>Username: </p>
+            <p>Password: </p>
+            <p>Email: </p>
+            <p>Date of birth: </p>
+            <p>Country: </p>
+            <p>City/town: </p>
+            <p>Postal code/ZIP: </p>
+            <p>Address: </p>
+            <p>House number: </p>
+        </div>
+        <div class="search-history-btn">
+            <p>View search history</p>
+        </div>
+    </div>
+    <div class="user-info-buttons-below">
+        <p>Edit Profile</p>
+        <p>My purchases</p>
+    </div>
+{% endblock %}
