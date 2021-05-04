@@ -1,3 +1,46 @@
-form {
-    background-color: blue;
+#sign-in-form {
+    text-align: center;
+}
+
+.form-input {
+
+    text-align: center;
+    margin: 0;
+}
+
+.form-fill {
+    background-color: white;
+    border-color: darkgrey;
+    color: dimgrey;
+    border: 1px solid white;
+    margin: 0.6rem;
+    padding: 0.3rem;
+    border-radius: 6px;
+}
+.sign-in-btn{
+    margin-top: 0.5rem;
+    border: 1px solid transparent;
+    color: white;
+    background-color: #6862f1;
+    padding-bottom: 0.7rem;
+    padding-top: 0.7rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 25px;
+    font-weight: bolder;
+}
+
+
+.signin-text {
+    margin-top: 7rem;
+    font-weight: bolder;
+}
+
+#text-for-sign-up {
+    margin-top: 0.5rem;
+    font-size: smaller;
+}
+
+#sign-up-clicker {
+    color: #6862f1;
 }
