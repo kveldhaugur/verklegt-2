@@ -11,43 +11,49 @@ body {
 	max-width: 3rem;
 	margin-left: 1rem;
 }
+
 .navbar {
     padding-top: 0rem;
     padding-bottom: 0rem;
 }
+
 .container-fluid {
 	background-color: white;
 }
+
 .btn-outline-success {
 	background-color: #efeefd;
 	color: #6862f1;
 	border-color: white;
 }
+
 .btn-outline-success:hover {
 	background-color: #6862f1;
 	color: #efeefd;
 	border-color: white;
 }
+
 .form-control {
 	background-color: #efeefd;
 	border-color: white;
 	color: #6862f1;
 }
+
 .text-before-product{
 	margin-top: 4rem;
 	border-bottom: 3px solid #6862f1;
 	line-height: 0;
 	text-align: center;
-
 }
+
 .text-before-product span {
 	background-color: #efeefd;
 	padding: 0 10px;
 	color: #6862f1;
 	font-weight: bolder;
 	font-size: 1.5rem;
-
 }
+
 footer {
 	position: fixed; /*Tekið út þegar síðan er ready*/
 	width: 100%;
@@ -57,10 +63,10 @@ footer {
 	text-align: center;
 	color: white;
 }
+
 .footer-text {
 	display: flex;
 	justify-content: space-between;
-
 }
 
 .footer-copyright {
