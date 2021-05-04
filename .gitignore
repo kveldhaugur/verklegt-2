@@ -159,4 +159,6 @@ Thumbs.db
 
 ship_o_cereal/.idea/
 .idea/dataSources.xml
+.idea/
 # End of https://www.toptal.com/developers/gitignore/api/django
+>>>>>>> test

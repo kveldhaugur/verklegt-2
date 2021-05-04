@@ -1,24 +1,7 @@
 from django.db import models
 
 
-class Manufacturer(models.Model):
-    ManID = models.IntegerField(primary_key=True, serialize=True)
-    Name = models.CharField(max_length=255)
-
-
-class ManufacturerLogo(models.Model):
-    ManID = models.OneToOneField(Manufacturer, on_delete=models.CASCADE, unique=True)
-    Image = models.CharField(max_length=9999)
-
-
-class Items(models.Model):
-    ItemID = models.IntegerField(primary_key=True, serialize=True)
-    ManID = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
-    Quantity_available = models.IntegerField()
-    Price = models.IntegerField()
-    Name = models.CharField(max_length=255)
-    Description = models.CharField(max_length=9999, blank=True)
-    Tags = models.ManyToManyField('ItemCategory')
+from catalogue.Items.models import Items
 
 
 class ItemCategory(models.Model):
