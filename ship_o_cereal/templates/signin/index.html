@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="form-signin">
+        <form id='sign-in-form' action="">
+            <h1 class="signin-text">Please sign in</h1>
+            <div class="signin-below">
+            <div class="form-input">
+                <p class="text-over-input">What is your email address?</p>
+                <input type="email" class="form-fill" id="signin-email" placeholder="Enter email address">
+            </div>
+            <div class="form-input">
+                <p class="text-over-input">What is your password?</p>
+                <input type="password" class="form-fill" id="signin-password" placeholder="Enter password">
+            </div>
+            </div>
+            <div>
+                <button class="sign-in-btn">Sign in</button>
+            </div>
+            <div>
+                <p id="text-for-sign-up">Don't have an account? <span><a href="{% url 'signup-index' %}" id="sign-up-clicker">Sign up</a></span></p>
+            </div>
+        </form>
+    </div>
+{% endblock %}
