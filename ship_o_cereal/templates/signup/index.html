@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="form-signin">
+        <form id='sign-in-form' action="">
+            <h1 class="signin-text">Sign-up here below</h1>
+            <div class="signin-below">
+                <div class="form-input">
+                    <p class="text-over-input">What is your name?</p>
+                    <input type="text" class="form-fill" id="sign-up-name" placeholder="Enter name">
+                </div>
+                 <div class="form-input">
+                    <p class="text-over-input">What is your email address?</p>
+                    <input type="email" class="form-fill" id="signup-email" placeholder="Enter email address">
+                </div>
+                 <div class="form-input">
+                    <p class="text-over-input">Confirm your email</p>
+                    <input type="email" class="form-fill" id="signup-email2" placeholder="Enter email address">
+                </div>
+
+                <div class="form-input">
+                    <p class="text-over-input">Create a password?</p>
+                    <input type="password" class="form-fill" id="signup-passw" placeholder="Enter password">
+                </div>
+                <div class="form-input">
+                    <p class="text-over-input">Confirm your password</p>
+                    <input type="password" class="form-fill" id="signup-passw2" placeholder="Enter password">
+                </div>
+
+                <div class="form-input">
+                    <p class="text-over-input">Enter your date of birth</p>
+                    <input class="form-fill" type="date">
+                </div>
+
+                <div id="signup-gender">
+                    <div>
+                        <input type="radio" value="Male" name="gender"> Male
+                    </div>
+                    <div>
+                        <input type="radio" value="Female" name="gender"> Female
+                    </div>
+                    <div>
+                        <input type="radio" value="Other" name="gender"> Other
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div>
+                <button class="sign-in-btn">Sign up</button>
+            </div>
+            <div>
+                <p id="text-for-sign-up">Have an account? <span><a href="{% url 'signin-index' %}" id="sign-up-clicker">Sign in</a></span></p>
+            </div>
+        </form>
+    </div>
+{% endblock %}
