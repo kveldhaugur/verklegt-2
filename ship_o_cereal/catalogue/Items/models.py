@@ -13,4 +13,5 @@ class Items(models.Model):
     Price = models.IntegerField()
     Name = models.CharField(max_length=255)
     Description = models.CharField(max_length=9999, blank=True)
+    Image = models.CharField(max_length=255, null=True)
     Tags = models.ManyToManyField('main.ItemCategory')
