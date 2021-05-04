@@ -10,6 +10,9 @@ Manufacturers = [
     {'ManID': 7, 'Name': 'Post Cereal'},
 ]
 # Create your views here.
+
 #No idea what render does but he does it in candy queen video so lets find out one day
+    #UPDATE: I found out what render does, some html stuff we probably won't use :^)
+    #TODO: remove this, probably
 def index(request):
-    return render(request, 'catalogue/')
+    return render(request, 'catalogue/Manufacturer/index.html', context={ Manufacturers })
