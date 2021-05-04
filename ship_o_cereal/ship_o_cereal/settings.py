@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'aboutus.apps.AboutusConfig',
     'checkout.apps.CheckoutConfig',
     'userprofile.apps.UserprofileConfig',
+    'productinfo.apps.ProductinfoConfig',
 ]
 
 MIDDLEWARE = [
