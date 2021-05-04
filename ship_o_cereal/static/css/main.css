@@ -55,7 +55,7 @@ body {
 }
 
 footer {
-	position: fixed; /*Tekið út þegar síðan er ready*/
+
 	width: 100%;
 	left: 0;
 	bottom: 0;
@@ -68,7 +68,7 @@ footer {
 	display: flex;
 	justify-content: space-between;
 	color: #efeefd;
-	font-weight: light;
+	font-weight: lighter;
 }
 
 .footer-copyright {

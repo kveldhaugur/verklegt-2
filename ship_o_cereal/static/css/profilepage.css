@@ -1,0 +1,35 @@
+#user-profile-pic {
+    margin: 1rem;
+    max-width: 4rem;
+}
+
+.user-info-box {
+    background-color: white;
+    padding: 1rem;
+    max-width: 60%;
+    width: 60%;
+}
+
+.top-of-profile {
+    display: flex;
+    width: 60%;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.profile-btn{
+    margin: 0.5rem;
+    border: 1px solid transparent;
+    color: white;
+    background-color: #6862f1;
+    padding-bottom: 0.3rem;
+    padding-top: 0.3rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.user-info-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.8rem;
+}
+
