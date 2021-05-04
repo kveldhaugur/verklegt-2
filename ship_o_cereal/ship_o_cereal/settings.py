@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'signin.apps.SigninConfig',
     'cart.apps.CartConfig',
     'catalogue.apps.CatalogueConfig',
-
+    'signup.apps.SignupConfig',
 ]
 
 MIDDLEWARE = [
