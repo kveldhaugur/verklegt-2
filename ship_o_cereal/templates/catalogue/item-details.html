@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <img class="item-img" src="/static/images/Items/{{ item.Image }}">
+    <h1>{{ item.Name }}</h1>
+    <p>{{ item.Description }}</p>
+    <p>${{ item.Price }}</p>
+
+
+{% endblock %}
+
