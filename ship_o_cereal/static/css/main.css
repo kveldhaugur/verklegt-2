@@ -76,3 +76,14 @@ footer {
 	font-weight: lighter;
 }
 
+.card-img-top {
+	max-height: 18rem;
+	overflow: hidden;
+}
+
+.card {
+	max-height: 28rem;
+	padding: 0.5rem;
+	margin: 1rem;
+	display: inline-block;
+}
