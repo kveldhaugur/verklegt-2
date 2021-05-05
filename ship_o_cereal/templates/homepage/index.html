@@ -4,7 +4,10 @@
     <div class="text-before-product">
         <span>Daily Deals</span>
     </div>
-
+    {% for cereal in cereals %}
+        <h4>{{ cereal.name }}</h4>
+        <p>{{ cereal.price }}</p>
+    {% endfor %}
     <div class="text-before-product">
         <span>Popular items</span>
     </div>
