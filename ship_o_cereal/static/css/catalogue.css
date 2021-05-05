@@ -1,9 +1,7 @@
 .card .card-img-top {
 	height: 20rem;
-	min-height: 20rem;
 	position: relative;
 	width: auto;
-	margin: auto;
 	margin-left: 50%;
 	transform: translateX(-50%);
 }
@@ -11,7 +9,6 @@
 .card {
 	text-align: center;
 	max-height: 28rem;
-	padding: 0.5rem;
 	margin: 1rem;
 	display: inline-block;
 	overflow: hidden;
@@ -70,3 +67,8 @@
     color: #6862f1;
 }
 
+.card-title {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
