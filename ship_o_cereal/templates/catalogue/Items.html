@@ -1,7 +1,11 @@
-<div class="Itembox">
+<div class="card" style="width: 18rem;">
     <a href="/catalogue/{{ item.ItemID }}">
-        <img class="item-img" src="/static/images/Items/{{ item.Image }}">
-        <h4>{{ item.Name }}</h4>
-        <p>{{ item.Description }}</p>
+            <img src="/static/images/Items/{{ item.Image }}?v={{ item.updated_at }}" class="card-img-top" alt="{{ item.Image }}">
+            <div class="item-price">${{ item.Price }}</div>
+        <div class="card-body">
+              <h5 class="card-title">{{ item.Name }}</h5>
+              <a href="#" class="btn btn-primary">See Details</a>
+              <a href="#" class="btn btn-primary">Add to Cart</a>
+        </div>
     </a>
 </div>

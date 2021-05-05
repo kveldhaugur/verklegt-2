@@ -1,0 +1,44 @@
+.item-container {
+    background-color: white;
+    margin: 1.5rem;
+    padding: 1.5rem;
+    width: 60%;
+}
+
+.item-img {
+    max-width: 10rem;
+}
+
+.card .card-img-top {
+	height: 20rem;
+	min-height: 20rem;
+	position: relative;
+	width: auto;
+	margin: auto;
+	margin-left: 50%;
+	transform: translateX(-50%);
+}
+
+.card {
+	text-align: center;
+	max-height: 28rem;
+	padding: 0.5rem;
+	margin: 1rem;
+	display: inline-block;
+	overflow: hidden;
+	position: relative;
+}
+
+.item-price {
+	font-size: 1.2rem;
+	display: inline-block;
+	padding: 0.2rem;
+	width: auto;
+	background: #FFFFFF;
+	border-radius: 0.8rem;
+	border: 0.2rem solid #9591F5;
+	position: absolute;
+	top: 60%;
+	right:10%;
+}
+
