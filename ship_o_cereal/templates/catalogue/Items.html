@@ -1,6 +1,7 @@
 <div class="card" style="width: 18rem;">
     <a href="/catalogue/{{ item.ItemID }}">
-        <img src="/static/images/Items/{{ item.Image }}?v={{ item.updated_at }}" class="card-img-top" alt="{{ item.Image }}">
+            <img src="/static/images/Items/{{ item.Image }}?v={{ item.updated_at }}" class="card-img-top" alt="{{ item.Image }}">
+            <div class="item-price">${{ item.Price }}</div>
         <div class="card-body">
               <h5 class="card-title">{{ item.Name }}</h5>
               <a href="#" class="btn btn-primary">See Details</a>

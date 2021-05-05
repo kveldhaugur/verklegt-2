@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <p>This is the catalogue page</p>
+    <link rel="stylesheet" href="{% static 'css/catalogue.css' %}">
+    <p>Heme < Catalogue</p>
     <div class="items">
         {% for item in items %}
             {% include 'catalogue/Items.html' with item=item %}
