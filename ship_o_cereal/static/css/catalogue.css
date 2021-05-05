@@ -36,11 +36,11 @@
     background-color: white;
     margin: 1.5rem;
     padding: 1.5rem;
-    width: 50%;
+    width: 45%;
 }
 
 .item-img {
-    max-width: 7rem;
+    max-width: 12rem;
     margin: 1.2rem;
     margin-left: 0;
     margin-top: 0;
@@ -70,3 +70,12 @@
     color: #6862f1;
 }
 
+.btn-primary {
+	background-color: #6862f1;
+	border-color: #9591F5;
+}
+
+.btn-primary:hover {
+	background-color: #786bc0;
+	border-color: #786bc0;
+}
