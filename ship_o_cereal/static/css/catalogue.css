@@ -1,5 +1,6 @@
 .card .card-img-top {
 	height: 20rem;
+	min-height: 20rem;
 	position: relative;
 	width: auto;
 	margin-left: 50%;
@@ -51,7 +52,6 @@
 
 .add-to-cart-btn {
     margin: 0;
-
     border: 1px solid transparent;
     color: white;
     background-color: #6862f1;
