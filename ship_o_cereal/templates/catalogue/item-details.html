@@ -1,13 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
+
     <link rel="stylesheet" href="{% static 'css/catalogue.css' %}">
     <div class="item-container">
         <div class="product-main-sector">
             <img class="item-img" src="/static/images/Items/{{ item.Image }}">
-            <h1>{{ item.Name }}</h1>
+            <div class="product-name-price">
+                <h1>{{ item.Name }}</h1>
+                <p>${{ item.Price }}</p>
+                <div class="cart-adder">
+                    <input type="number" class="form-fill" id="add-to-cart-amount-btn" placeholder="Amount">
+                    <button class="add-to-cart-btn">Add to cart</button>
+                </div>
 
-            <p>${{ item.Price }}</p>
+            </div>
+
         </div>
 
         <div class="product-description-sector">
