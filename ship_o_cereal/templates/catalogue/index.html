@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
     <p>This is the catalogue page</p>
+    <div class="items">
+        {% for item in items %}
+            {% include 'catalogue/Items.html' with item=item %}
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -5,10 +5,10 @@ from main.models import Items
 
 # Create your views here.
 def index(request):
-    context = {'Items': Items.objects.all().order_by('Name')}
+    context = {'items': Items.objects.all().order_by('Name')}
     return render(request, 'catalogue/index.html', context)
 
 def get_item_by_id(request, id):
     return render(request, 'catalogue/item-details.html', {
-        'Item': get_object_or_404(Items, pk=id)
+        'item': get_object_or_404(Items, pk=id)
     })
