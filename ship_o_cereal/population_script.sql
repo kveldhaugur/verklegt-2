@@ -8,7 +8,7 @@ VALUES
     ( 6,  'Quaker'),
     ( 7,  'Post Cereal');
 
-INSERT INTO Items (ItemID, Quantity, Price, Name, Description, ManID)
+INSERT INTO Items (ItemID, Image, Quantity, Price, Name, Description, ManID)
 VALUES
 (1 , 'Travis_scott_reeses_puffs.jpg', 1, 'Travis scott Reeses', 100, 'This limited brand was sold in 2019, a super limited brand designed by the rapper, Travis Scott, himself'),
 (2 , 'Reeses_norm.png', 1, 'Reeses puffs', 10, 'This strictly worse brand from it''s much more limited counterpart, designed by Travis Scott still somehow manages to sell despite it''s lack of superiority. We don''t know how.'),
