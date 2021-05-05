@@ -1,12 +1,30 @@
 from django.db import models
 
 
-from catalogue.Items.models import Items
+class Manufacturer(models.Model):
+    ManID = models.IntegerField(primary_key=True, serialize=True)
+    Name = models.CharField(max_length=255)
+
+
+class ManufacturerLogo(models.Model):
+    ManID = models.OneToOneField(Manufacturer, on_delete=models.CASCADE, unique=True)
+    Image = models.CharField(max_length=9999)
 
 
 class ItemCategory(models.Model):
     CategoryID = models.IntegerField(primary_key=True, serialize=True)
     CategoryTag = models.CharField(max_length=255)
+
+
+class Items(models.Model):
+    ItemID = models.IntegerField(primary_key=True, serialize=True)
+    ManID = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
+    Quantity_available = models.IntegerField()
+    Price = models.IntegerField()
+    Name = models.CharField(max_length=255)
+    Description = models.CharField(max_length=9999, blank=True)
+    Image = models.CharField(max_length=255, null=True)
+    Tags = models.ManyToManyField(ItemCategory)
 
 
 class Country(models.Model):
@@ -39,11 +57,11 @@ class UserInfo(models.Model):
 class Order(models.Model):
     OrderID = models.IntegerField(primary_key=True, serialize=True)
     AccountID = models.ForeignKey('Account', on_delete=models.CASCADE, null=False)
-    ItemsInOrder = models.ManyToManyField('catalogue.Items')
+    ItemsInOrder = models.ManyToManyField(Items)
 
 
 class OrderContains(models.Model):
-    ItemID = models.ForeignKey('catalogue.Items', on_delete=models.CASCADE)
+    ItemID = models.ForeignKey(Items, on_delete=models.CASCADE)
     Quantity = models.IntegerField(null=False)
 
 # Create your models here.

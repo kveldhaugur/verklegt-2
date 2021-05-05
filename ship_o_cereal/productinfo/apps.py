@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ManufacturerConfig(AppConfig):
+class ProductinfoConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Manufacturer'
+    name = 'productinfo'
