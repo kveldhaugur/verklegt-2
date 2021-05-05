@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <div>
-        <img src="/static/images/profilepic_darker.png" alt="Here is the profile pic">
-        <p>Change Image</p>
+    <link rel="stylesheet" href="{% static 'css/profilepage.css' %}">
+    <div class="top-of-profile">
+
+            <img id='user-profile-pic' src="/static/images/profilepic_darker.png" alt="Here is the profile pic">
+            <button class="profile-btn">Change image</button>
+
+
         <h1>Account Overview</h1>
     </div>
     <div class="user-info-container">
@@ -19,11 +24,11 @@
             <p>House number: </p>
         </div>
         <div class="search-history-btn">
-            <p>View search history</p>
+            <button class="profile-btn">Search history</button>
         </div>
     </div>
     <div class="user-info-buttons-below">
-        <p>Edit Profile</p>
-        <p>My purchases</p>
+        <button class="profile-btn">Edit profile</button>
+        <button class="profile-btn">My purchases</button>
     </div>
 {% endblock %}
