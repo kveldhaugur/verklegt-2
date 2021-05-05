@@ -3,7 +3,6 @@
 	min-height: 20rem;
 	position: relative;
 	width: auto;
-	margin: auto;
 	margin-left: 50%;
 	transform: translateX(-50%);
 }
@@ -11,7 +10,6 @@
 .card {
 	text-align: center;
 	max-height: 28rem;
-	padding: 0.5rem;
 	margin: 1rem;
 	display: inline-block;
 	overflow: hidden;
@@ -54,7 +52,6 @@
 
 .add-to-cart-btn {
     margin: 0;
-
     border: 1px solid transparent;
     color: white;
     background-color: #6862f1;
@@ -70,6 +67,7 @@
     color: #6862f1;
 }
 
+
 .btn-primary {
 	background-color: #6862f1;
 	border-color: #9591F5;
@@ -78,4 +76,9 @@
 .btn-primary:hover {
 	background-color: #786bc0;
 	border-color: #786bc0;
+
+.card-title {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
