@@ -4,13 +4,19 @@
     <div class="text-before-product">
         <span>Daily Deals</span>
     </div>
-    {% for cereal in cereals %}
-        <h4>{{ cereal.name }}</h4>
-        <p>{{ cereal.price }}</p>
-    {% endfor %}
+    <div class="items">
+        {% for Item in Items %}
+            {% include 'homepage/single_item.html' with Item=Item %}
+        {% endfor %}
+    </div>
+
+
+
     <div class="text-before-product">
         <span>Popular items</span>
     </div>
+
+
 
     <div class="text-before-product">
         <span>Categories</span>
