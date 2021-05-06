@@ -13,12 +13,13 @@ body {
 }
 
 .navbar {
-    padding-top: 0rem;
-    padding-bottom: 0rem;
+    padding-top: 0;
+    padding-bottom: 0;
+
 }
 
 .container-fluid {
-	background-color: white;
+	background-color: blue;
 }
 
 .btn-outline-success {
@@ -55,7 +56,6 @@ body {
 }
 
 footer {
-
 	width: 100%;
 	left: 0;
 	bottom: 0;
@@ -70,6 +70,8 @@ footer {
 	color: #efeefd;
 	font-weight: lighter;
 }
+
+
 
 .footer-copyright {
  	font-size: small;
