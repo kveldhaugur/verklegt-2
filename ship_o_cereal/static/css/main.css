@@ -77,3 +77,12 @@ footer {
  	font-size: small;
 	font-weight: lighter;
 }
+
+.search-container {
+	width: 20%;
+	display: flex;
+}
+
+#search-box {
+	max-width: 15rem;
+}

@@ -12,9 +12,11 @@ def index(request):
             'ItemID': x.ItemID,
             'Name': x.Name,
             'Description': x.Description,
-            'Image': x.Image
+            'Image': x.Image,
+            'Price': x.Price
         } for x in Items.objects.filter(Name__icontains=search_filter) ]
         return JsonResponse({'data': items})
+
     context = {'items': Items.objects.all().order_by('Name')}
     return render(request, 'catalogue/index.html', context)
 

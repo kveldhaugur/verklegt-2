@@ -2,7 +2,15 @@
 {% load static %}
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/catalogue.css' %}">
-    <p>Heme < Catalogue</p>
+    <p>Home < Catalogue</p>
+    <div class="sort-container">
+        <label id="sort-label" for="sort-by">Sort by:</label>
+        <select name="sort-by" id="sort-by" style="height: auto;">
+            <option id="name-sort" value="name">Name</option>
+            <option id="lth-sort" value="lth">Price: low to high</option>
+            <option id="htl-sort" value="htl">Price: high to low</option>
+        </select>
+    </div>
     <div class="items">
         {% for item in items %}
             {% include 'catalogue/Items.html' with item=item %}
