@@ -3,5 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='catalogue-index'),
-    path('<int:id>', views.get_item_by_id, name='item-details')
+    path('<int:id>', views.get_item_by_id, name='item-details'),
+    path('create_item', views.create_item, name='create_item')
 ]
