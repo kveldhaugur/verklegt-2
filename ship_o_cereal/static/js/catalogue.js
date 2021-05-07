@@ -1,3 +1,5 @@
+var recentSearch = '';
+
 $(function() {
   $('#search-box').keypress(function(e) {
     var key = e.which;
@@ -9,19 +11,21 @@ $(function() {
   });
 });
 
+var sendToCatalogue = function() {
+    if (window.location.pathname !== '/catalogue/') {
+        window.location.replace('/catalogue/');
+    };
+}
+
 $(document).ready(function() {
     $('#search-btn').on('click', function(e) {
         e.preventDefault();
         var searchText = $('#search-box').val();
-        if (window.location.pathname !== '/catalogue/') {
-                  window.location.replace("/catalogue");
-                };
-
+        recentSearch = searchText;
         $.ajax( {
             url: '/catalogue/?search_filter=' + searchText,
             type: 'GET',
             success: function(resp) {
-
                 var newHtml = resp.data.map(d => {
                     return `<div class="card" style="width: 18rem;">
                             <a href="/catalogue/${d.ItemID}">
@@ -35,6 +39,7 @@ $(document).ready(function() {
                             </a>
                         </div>`
                 });
+
                 $('.items').html(newHtml.join(''));
                 $('#search-box').val('');
             },
@@ -53,7 +58,6 @@ function sortByProperty(property){
          return 1;
       else if(a[property] < b[property])
          return -1;
-
       return 0;
    }
 }
@@ -64,7 +68,6 @@ function sortByPropertyInverse(property){
          return 1;
       else if(a[property] > b[property])
          return -1;
-
       return 0;
    }
 }
@@ -75,26 +78,23 @@ $(document).ready(function() {
     $('#sort-by').change(function(e) {
         e.preventDefault();
         var selectedOption = $(this).children("option:selected").val();
-        var searchText = '';
         $.ajax( {
-            url: '/catalogue/?search_filter=' + searchText,
+            url: '/catalogue/?search_filter=' + recentSearch,
             type: 'GET',
             success: function(resp) {
                 if (selectedOption === 'lth') {
-                    order = 'Price'
-                    var newArr = resp.data.sort(sortByProperty(order))
+                    order = 'Price';
+                    var newArr = resp.data.sort(sortByProperty(order));
                 } else if (selectedOption === 'htl'){
-                    order = 'Price'
-                    var newArr = resp.data.sort(sortByPropertyInverse(order))
+                    order = 'Price';
+                    var newArr = resp.data.sort(sortByPropertyInverse(order));
                 } else if (selectedOption === 'az'){
-                    order = 'Name'
-                    var newArr = resp.data.sort(sortByProperty(order))
+                    order = 'Name';
+                    var newArr = resp.data.sort(sortByProperty(order));
                 } else {
-                    order = 'Name'
-                    var newArr = resp.data.sort(sortByPropertyInverse(order))
+                    order = 'Name';
+                    var newArr = resp.data.sort(sortByPropertyInverse(order));
                 }
-
-
 
                 var newHtml = newArr.map(d => {
                     return `<div class="card" style="width: 18rem;">

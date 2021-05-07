@@ -4,6 +4,13 @@
     <div class="text-before-product">
         <span>Daily Deals</span>
     </div>
+
+
+
+
+    <div class="text-before-product">
+        <span>Popular items</span>
+    </div>
     <div class="items">
         {% for Item in Items %}
             {% include 'homepage/single_item.html' with Item=Item %}
@@ -13,12 +20,44 @@
 
 
     <div class="text-before-product">
-        <span>Popular items</span>
-    </div>
-
-
-
-    <div class="text-before-product">
         <span>Categories</span>
+    </div>
+    <div class="categories-homepage">
+        <div class="card" style="width: 20rem;">
+            <a href="#">
+                    <img src="/static/images/Items/Buc_Wheats.jpg" class="categories-img" alt="some photo here">
+                    <img src="/static/images/Items/Capn_crunch.jpg" class="categories-img" alt="some photo here">
+                    <img src="/static/images/Items/Rice_krispies.jpg" class="categories-img" alt="some photo here">
+                    <img src="/static/images/Items/Honey_nut.jpg" class="categories-img" alt="some photo here">
+                <div class="card-body">
+                      <h5 class="category-title">Cereals</h5>
+                </div>
+            </a>
+        </div>
+        <div class="card" style="width: 20rem;">
+            <a href="#">
+                    <img src="/static/images/Items/Buc_Wheats.jpg" class="categories-img" alt="some photo here">
+                    <img src="/static/images/Items/Capn_crunch.jpg" class="categories-img" alt="some photo here">
+                    <img src="/static/images/Items/Rice_krispies.jpg" class="categories-img" alt="some photo here">
+                    <img src="/static/images/Items/Honey_nut.jpg" class="categories-img" alt="some photo here">
+                <div class="card-body">
+                      <h5 class="category-title">Merch</h5>
+                </div>
+            </a>
+        </div>
+        <div class="card" style="width: 20rem;">
+            <a href="#">
+                <div class="img-cat-container">
+                    <img src="/static/images/Items/Buc_Wheats.jpg" class="categories-img" alt="some photo here">
+                    <img src="/static/images/Items/Capn_crunch.jpg" class="categories-img" alt="some photo here">
+                    <img src="/static/images/Items/Rice_krispies.jpg" class="categories-img" alt="some photo here">
+                    <img src="/static/images/Items/Honey_nut.jpg" class="categories-img" alt="some photo here">
+                </div>
+
+                <div class="card-body">
+                      <h5 class="category-title">Books</h5>
+                </div>
+            </a>
+        </div>
     </div>
 {% endblock %}

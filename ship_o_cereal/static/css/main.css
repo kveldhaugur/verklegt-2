@@ -79,10 +79,32 @@ footer {
 }
 
 .search-container {
-	width: 20%;
+	width: 30%;
 	display: flex;
 }
 
 #search-box {
-	max-width: 15rem;
+	max-width: 20rem;
+}
+
+.category-title {
+	font-size: xx-large;
+	font-weight: bolder;
+	color: #6862f1;
+	padding-bottom: 1rem;
+}
+
+.categories-homepage {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+a {
+	color: #6862f1;
+}
+
+.categories-img {
+	max-width: 7rem;
+	margin: 0.2rem;
+	margin-top: 0.5rem;
 }
