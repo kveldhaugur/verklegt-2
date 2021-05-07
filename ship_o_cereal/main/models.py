@@ -4,6 +4,8 @@ from django.db import models
 class Manufacturer(models.Model):
     ManID = models.IntegerField(primary_key=True, serialize=True)
     Name = models.CharField(max_length=255)
+    def __str__(self):
+        return self.Name
 
 
 class ManufacturerLogo(models.Model):
@@ -14,6 +16,8 @@ class ManufacturerLogo(models.Model):
 class ItemCategory(models.Model):
     CategoryID = models.IntegerField(primary_key=True, serialize=True)
     CategoryTag = models.CharField(max_length=255)
+    def __str__(self):
+        return self.CategoryTag
 
 
 class Items(models.Model):
@@ -25,6 +29,8 @@ class Items(models.Model):
     Description = models.CharField(max_length=9999, blank=True)
     Image = models.CharField(max_length=255, null=True)
     Tags = models.ManyToManyField(ItemCategory)
+    def __str__(self):
+        return self.Name
 
 
 class Country(models.Model):

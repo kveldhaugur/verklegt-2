@@ -1,4 +1,4 @@
-#sign-in-form {
+.sign-in-form {
     text-align: center;
 }
 
@@ -6,10 +6,9 @@
     text-align: center;
     margin: 0;
     margin-bottom: 0.4rem;
-
 }
 
-.form-fill {
+.text-over-input input {
     background-color: white;
     border-color: darkgrey;
     color: dimgrey;

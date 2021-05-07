@@ -18,13 +18,23 @@
           <a class="nav-link active" aria-current="page" href="{% url 'cart-index' %}">Cart</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Type to search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    <a class="navbar-brand" href="{% url 'userprofile-index' %}">
+        <div class="search-container">
+          <input class="form-control me-2" type="search" id="search-box" placeholder="Type to search" aria-label="Search">
+          <button class="btn btn-outline-success" id="search-btn" type="submit">Search</button>
+        </div>
+
+    {% if user.is_authenticated %}
+      <a class="navbar-brand" href="{% url 'userprofile-index' %}">
+        <!-- TODO: when authenticated, take picture from profile or something -->
         <img class="main_profile" src="/static/images/profile_pic.png" alt="Ship O' Cereal">
-    </a>
+      </a>
+    {% else %}
+      <a class="navbar-brand" href="{% url 'signin-index' %}">
+        <img class="main_profile" src="/static/images/profile_pic.png" alt="Ship O' Cereal">
+      </a>
+    {% endif %}
+
+
     </div>
   </div>
 </nav>

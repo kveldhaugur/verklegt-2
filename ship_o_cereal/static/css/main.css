@@ -13,8 +13,9 @@ body {
 }
 
 .navbar {
-    padding-top: 0rem;
-    padding-bottom: 0rem;
+    padding-top: 0;
+    padding-bottom: 0;
+
 }
 
 .container-fluid {
@@ -55,7 +56,6 @@ body {
 }
 
 footer {
-
 	width: 100%;
 	left: 0;
 	bottom: 0;
@@ -71,7 +71,40 @@ footer {
 	font-weight: lighter;
 }
 
+
+
 .footer-copyright {
  	font-size: small;
 	font-weight: lighter;
+}
+
+.search-container {
+	width: 30%;
+	display: flex;
+}
+
+#search-box {
+	max-width: 20rem;
+}
+
+.category-title {
+	font-size: xx-large;
+	font-weight: bolder;
+	color: #6862f1;
+	padding-bottom: 1rem;
+}
+
+.categories-homepage {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+a {
+	color: #6862f1;
+}
+
+.categories-img {
+	max-width: 7rem;
+	margin: 0.2rem;
+	margin-top: 0.5rem;
 }
