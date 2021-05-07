@@ -30,5 +30,8 @@
     <div class="user-info-buttons-below">
         <button class="profile-btn">Edit profile</button>
         <button class="profile-btn">My purchases</button>
+        <form action="{% url 'logout-index' %}">
+            <input type="submit" value="Logout" class="profile-btn">
+        </form>
     </div>
 {% endblock %}

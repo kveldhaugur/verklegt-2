@@ -1,6 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<div class="form-signin">
+    <form method="post">
+        <h1 class="signin-text">Please sign in</h1>
+            {% csrf_token %}
+            {% for field in signin_form %}
+                <div class="form-input">
+                    {{field.label_tag}}
+                    <br>
+                    <div class="text-over-input">
+                        {{field}}
+                    </div>
+                    {% for error in field.errors %}
+                        <p>{{error}}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        <button class="sign-in-btn" type="submit">Sign in</button>
+    </form>
+    <p id="text-for-sign-up">Don't have an account?
+        <span>
+            <a href="{% url 'signup-index' %}" id="sign-up-clicker">Sign up</a>
+        </span>
+    </p>
+</div>
+{% endblock %}
+<!--
     <div class="form-signin">
         <form id='sign-in-form' action="">
             <h1 class="signin-text">Please sign in</h1>
@@ -18,8 +43,9 @@
                 <button class="sign-in-btn">Sign in</button>
             </div>
             <div>
-                <p id="text-for-sign-up">Don't have an account? <span><a href="{% url 'signup-index' %}" id="sign-up-clicker">Sign up</a></span></p>
+
             </div>
         </form>
     </div>
-{% endblock %}
+
+-->
