@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Manufacturer(models.Model):
@@ -38,16 +39,8 @@ class Country(models.Model):
     CountryName = models.CharField(max_length=255)
 
 
-class Account(models.Model):
-    AccountID = models.IntegerField(primary_key=True, serialize=True)
-    AccountName = models.CharField(max_length=255)
-    AccountPass = models.CharField(max_length=255)
-    ProfilePic = models.CharField(max_length=255)
-    DateOfBirth = models.DateTimeField(auto_now=False, null=True)
-
-
 class UserInfo(models.Model):
-    AccountConnected = models.OneToOneField('Account', primary_key=True, on_delete=models.CASCADE)
+    AccountConnected = models.ForeignKey(User, primary_key=True, on_delete=models.CASCADE)
     FirstName = models.CharField(max_length=255)
     LastName = models.CharField(max_length=255)
     City = models.CharField(max_length=255)
@@ -60,14 +53,14 @@ class UserInfo(models.Model):
     Country = models.ForeignKey(Country, on_delete=models.CASCADE)
 
 
-class Order(models.Model):
-    OrderID = models.IntegerField(primary_key=True, serialize=True)
-    AccountID = models.ForeignKey('Account', on_delete=models.CASCADE, null=False)
-    ItemsInOrder = models.ManyToManyField(Items)
-
-
 class OrderContains(models.Model):
     ItemID = models.ForeignKey(Items, on_delete=models.CASCADE)
     Quantity = models.IntegerField(null=False)
+
+
+class Order(models.Model): #has id
+    AccountID = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    ItemsInOrder = models.ManyToManyField(OrderContains)
+
 
 # Create your models here.
