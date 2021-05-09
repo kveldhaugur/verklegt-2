@@ -35,9 +35,9 @@ class Items(models.Model):
 
 
 class Country(models.Model):
-    CountryID = models.IntegerField(primary_key=True, serialize=True)
     CountryName = models.CharField(max_length=255)
-
+    def __str__(self):
+        return f'{self.CountryName}'
 
 class UserInfo(models.Model):
     AccountConnected = models.ForeignKey(User, primary_key=True, on_delete=models.CASCADE)
