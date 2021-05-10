@@ -1,4 +1,5 @@
 var recentSearch = '';
+var filteredArr = [];
 
 $(function() {
   $('#search-box').keypress(function(e) {
@@ -105,6 +106,7 @@ $(document).ready(function() {
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
                                     <a href="#" class="btn btn-primary">Add to Cart</a>
+                                    
                                 </div>
                             </a>
                         </div>`
@@ -144,6 +146,50 @@ $(document).ready(function() {
                 });
                 $('.items').html(newHtml.join(''));
                 $('#search-box').val('');
+            },
+            error: function(xhr, status, error) {
+                // TODO Show toaster
+                console.error(error);
+            }
+        })
+    });
+});
+
+
+$(document).ready(function() {
+    $('#filter-by').trigger('change');
+    $('#filter-by').change(function(e) {
+        e.preventDefault();
+        var selectedOption = Number($(this).children("option:selected").val());
+        $.ajax( {
+            url: '/catalogue/?search_filter=' + recentSearch,
+            type: 'GET',
+            success: function(resp) {
+                var newArr = resp.data
+                var filteredArr = []
+                for (i = 0; i < newArr.length; i++) {
+                    if (newArr[i].Tags.includes(selectedOption)) {
+                        filteredArr.push(newArr[i]);
+                    }
+                };
+
+
+                var newHtml = filteredArr.map(d => {
+                    return `<div class="card" style="width: 18rem;">
+                            <a href="/catalogue/${d.ItemID}">
+                                <img src="/static/images/Items/${d.Image}?v=${d.updated_at}" class="card-img-top" alt="${d.Image}"/>
+                                <div class="item-price">$${d.Price}</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">${d.Name}</h5>
+                                    <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
+                                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                                    
+                                </div>
+                            </a>
+                        </div>`
+                });
+                $('.items').html(newHtml.join(''));
+
             },
             error: function(xhr, status, error) {
                 // TODO Show toaster
