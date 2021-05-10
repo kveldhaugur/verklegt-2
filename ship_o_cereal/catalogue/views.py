@@ -9,11 +9,13 @@ from main.models import Items, ItemCategory
 def index(request):
     if 'search_filter' in request.GET:
         search_filter = request.GET['search_filter']
+
         items = []
         for x in Items.objects.filter(Name__icontains=search_filter):
             tags = []
             for tag in x.Tags.all():
                 tags.append(tag.CategoryID)
+
             ble = {
                 'ItemID': x.ItemID,
                 'Name': x.Name,
@@ -33,6 +35,7 @@ def get_item_by_id(request, id):
     return render(request, 'catalogue/item-details.html', {
         'item': get_object_or_404(Items, pk=id)
     })
+
 
 
 def create_item(request):
