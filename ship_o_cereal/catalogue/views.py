@@ -76,3 +76,14 @@ def create_item(request):
     return render(request, 'catalogue/create_item.html', {
         'form': form
     })
+
+def edit_cart(request):
+    if request.method == 'POST':
+        form = ItemToCartForm(data=request.POST)
+        if form.is_valid():
+            item = form.save()
+            return
+    else:
+        form = ItemToCartForm(request, 'catalogue/', {
+            'form': form
+        })
