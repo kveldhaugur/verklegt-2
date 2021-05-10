@@ -56,7 +56,6 @@ def get_item_by_id(request, id):
         'Price': item.Price,
         'Tags': tags
     }
-    print(retItem)
     return render(request, 'catalogue/item-details.html', {
         'item': retItem
     })
