@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <h2>Please enter an image url for your new profile picture</h2>
+<form method="POST">{% csrf_token %}
+  {{ change_image_form }}
+  <button type="submit">send picture</button>
+</form>
+<br>
+
+{% endblock %}

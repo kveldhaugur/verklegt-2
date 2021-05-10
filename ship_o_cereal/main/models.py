@@ -63,4 +63,9 @@ class Order(models.Model): #has id
     ItemsInOrder = models.ManyToManyField(OrderContains)
 
 
+class UserImage(models.Model):
+    User = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    Image = models.URLField(max_length=9999, null=True)
+
+
 # Create your models here.

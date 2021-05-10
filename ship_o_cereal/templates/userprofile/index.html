@@ -3,8 +3,12 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/profilepage.css' %}">
     <div class="top-of-profile">
-
+        {% if user_image == None %}
             <img id='user-profile-pic' src="/static/images/profilepic_darker.png" alt="Here is the profile pic">
+        {% else %}
+            <img id="user-profile-pic" src="{{ user_image }}">
+        {% endif %}
+
 
 
         <h1>Account Overview</h1>
