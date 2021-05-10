@@ -9,13 +9,21 @@ from main.models import Items, ItemCategory
 def index(request):
     if 'search_filter' in request.GET:
         search_filter = request.GET['search_filter']
-        items = [ {
-            'ItemID': x.ItemID,
-            'Name': x.Name,
-            'Description': x.Description,
-            'Image': x.Image,
-            'Price': x.Price
-        } for x in Items.objects.filter(Name__icontains=search_filter) ]
+        items = []
+        for x in Items.objects.filter(Name__icontains=search_filter):
+            tags = []
+            for tag in x.Tags.all():
+                tags.append(tag.CategoryID)
+            ble = {
+                'ItemID': x.ItemID,
+                'Name': x.Name,
+                'Description': x.Description,
+                'Image': x.Image,
+                'Price': x.Price,
+                'Tags': tags
+            }
+            items.append(ble)
+
         return JsonResponse({'data': items})
 
     context = {'items': Items.objects.all().order_by('Name'), 'tags': ItemCategory.objects.all().order_by('CategoryID')}

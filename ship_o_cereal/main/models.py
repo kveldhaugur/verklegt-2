@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 
 
 class Manufacturer(models.Model):
@@ -67,5 +68,9 @@ class UserImage(models.Model):
     User = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     Image = models.URLField(max_length=9999, null=True)
 
+
+class SessionHistory(models.Model):
+    SessionID = models.ForeignKey(Session, on_delete=models.CASCADE, null=False, primary_key=True)
+    HistoryStr = models.CharField(max_length=255)
 
 # Create your models here.
