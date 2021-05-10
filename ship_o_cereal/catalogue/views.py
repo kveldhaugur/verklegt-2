@@ -2,13 +2,15 @@ import django.db.models.fields.related_descriptors
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, JsonResponse
 from catalogue.forms.item_form import ItemCreateForm
-from main.models import Items, ItemCategory
+from main.models import Items, ItemCategory, SessionHistory
+from django.contrib.sessions.models import Session
 
 
 # Create your views here.
 def index(request):
     if 'search_filter' in request.GET:
         search_filter = request.GET['search_filter']
+        add_to_history(request.session, search_filter)
 
         items = []
         for x in Items.objects.filter(Name__icontains=search_filter):
@@ -30,6 +32,16 @@ def index(request):
 
     context = {'items': Items.objects.all().order_by('Name'), 'tags': ItemCategory.objects.all().order_by('CategoryID')}
     return render(request, 'catalogue/index.html', context)
+
+
+def add_to_history(session, searchstr):
+    if session.session_key == None:
+        session.create()
+    key = session.session_key
+    user_sesh = Session.objects.get(session_key=key)
+    new_history = SessionHistory(SessionID=user_sesh, HistoryStr=searchstr)
+    new_history.save()
+
 
 def get_item_by_id(request, id):
     return render(request, 'catalogue/item-details.html', {

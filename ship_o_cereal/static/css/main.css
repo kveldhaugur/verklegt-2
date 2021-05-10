@@ -71,8 +71,6 @@ footer {
 	font-weight: lighter;
 }
 
-
-
 .footer-copyright {
  	font-size: small;
 	font-weight: lighter;
@@ -107,4 +105,29 @@ a {
 	max-width: 7rem;
 	margin: 0.2rem;
 	margin-top: 0.5rem;
+
+}
+
+.history_container {
+	visibility: hidden;
+	position: absolute;
+	width: 10rem;
+	right: 0%;
+	top: 100%;
+}
+
+.history_container.show {
+	visibility: visible;
+	-webkit-animation: fadeIn 1s;
+  	animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
 }

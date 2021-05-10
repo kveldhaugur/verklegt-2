@@ -70,7 +70,7 @@ class UserImage(models.Model):
 
 
 class SessionHistory(models.Model):
-    SessionID = models.ForeignKey(Session, on_delete=models.CASCADE, null=False, primary_key=True)
+    SessionID = models.ForeignKey(Session, on_delete=models.CASCADE, null=False)
     HistoryStr = models.CharField(max_length=255)
 
 # Create your models here.

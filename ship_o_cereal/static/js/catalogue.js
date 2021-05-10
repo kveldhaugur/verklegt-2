@@ -198,3 +198,8 @@ $(document).ready(function() {
         })
     });
 });
+
+function ShowHistory() {
+    var x = document.getElementById("history_container");
+    x.classList.toggle("show")
+}
