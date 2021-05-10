@@ -106,7 +106,7 @@ $(document).ready(function() {
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
                                     <a href="#" class="btn btn-primary">Add to Cart</a>
-                                    
+                               
                                 </div>
                             </a>
                         </div>`
@@ -172,7 +172,6 @@ $(document).ready(function() {
                         filteredArr.push(newArr[i]);
                     }
                 };
-
 
                 var newHtml = filteredArr.map(d => {
                     return `<div class="card" style="width: 18rem;">
