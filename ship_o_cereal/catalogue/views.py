@@ -37,10 +37,14 @@ def index(request):
 def add_to_history(session, searchstr):
     if session.session_key == None:
         session.create()
-    key = session.session_key
-    user_sesh = Session.objects.get(session_key=key)
-    new_history = SessionHistory(SessionID=user_sesh, HistoryStr=searchstr)
-    new_history.save()
+    if searchstr != "" and searchstr is not None:
+        key = session.session_key
+        user_sesh = Session.objects.get(session_key=key)
+        try:
+            SessionHistory.objects.get(SessionID=user_sesh, HistoryStr=searchstr)
+        except SessionHistory.DoesNotExist:
+            new_history = SessionHistory(SessionID=user_sesh, HistoryStr=searchstr)
+            new_history.save()
 
 
 def get_item_by_id(request, id):

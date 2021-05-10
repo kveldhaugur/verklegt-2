@@ -54,14 +54,38 @@ class UserInfo(models.Model):
     Country = models.ForeignKey(Country, on_delete=models.CASCADE)
 
 
+class ShippingInfo(models.Model):
+    FirstName = models.CharField(max_length=255)
+    LastName = models.CharField(max_length=255)
+    City = models.CharField(max_length=255)
+    PostalCode = models.CharField(max_length=15)
+    Address = models.CharField(max_length=255)
+    HouseNum = models.IntegerField()
+    MobilePhone = models.CharField(max_length=63)
+    Email = models.CharField(max_length=255)
+    SSN = models.CharField(max_length=255)
+    Country = models.ForeignKey(Country, on_delete=models.CASCADE)
+
+
+class CartContains(models.Model):
+    ItemID = models.ForeignKey(Items, on_delete=models.CASCADE, null=False)
+    Quantity = models.IntegerField(null=False)
+
+
+class ShoppingCart(models.Model):
+    SessionID = models.ForeignKey(Session, on_delete=models.CASCADE, null=False)
+    ItemsInCart = models.ManyToManyField(CartContains)
+
+
 class OrderContains(models.Model):
-    ItemID = models.ForeignKey(Items, on_delete=models.CASCADE)
+    ItemID = models.ForeignKey(Items, on_delete=models.PROTECT)
     Quantity = models.IntegerField(null=False)
 
 
 class Order(models.Model): #has id
-    AccountID = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    ShippingInfoID = models.ForeignKey(ShippingInfo, on_delete=models.PROTECT, null=False)
     ItemsInOrder = models.ManyToManyField(OrderContains)
+    TotalPrice = models.IntegerField(null=False)
 
 
 class UserImage(models.Model):
