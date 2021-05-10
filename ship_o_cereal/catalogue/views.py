@@ -44,11 +44,22 @@ def add_to_history(session, searchstr):
 
 
 def get_item_by_id(request, id):
+    item = get_object_or_404(Items, pk=id)
+    tags = []
+    for tag in item.Tags.all():
+        tags.append(tag.CategoryTag)
+    retItem = {
+        'ItemID': item.ItemID,
+        'Name': item.Name,
+        'Description': item.Description,
+        'Image': item.Image,
+        'Price': item.Price,
+        'Tags': tags
+    }
+    print(retItem)
     return render(request, 'catalogue/item-details.html', {
-        'item': get_object_or_404(Items, pk=id)
+        'item': retItem
     })
-
-
 
 def create_item(request):
     if request.method == 'POST':
