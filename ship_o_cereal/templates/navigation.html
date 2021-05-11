@@ -19,9 +19,13 @@
         </li>
       </ul>
         <div class="search-container">
-          <input class="form-control me-2" type="search" id="search-box" placeholder="Type to search" aria-label="Search">
-          <button class="btn btn-outline-success" id="search-btn" type="submit">Search</button>
-            <div class="btn-group">
+
+          <form method=POST action="{% url 'catalogue-index' %}">
+            {% csrf_token %}
+            <input class="form-control me-2" type="search" id="search-box" placeholder="Type to search" aria-label="Search" name="search_filter">
+            <button class="btn btn-outline-success" id="search-btn" type="submit" >Search</button>
+          </form>
+          <div class="btn-group">
                 <button type="button" class="btn btn-danger dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
                   <img src="/static/images/history.png" style="width: 2rem">
                 </button>
@@ -30,10 +34,7 @@
                   {% for item in history %}
                   <li><a class="dropdown-item" id="{{ item }}-historystr" value="{{ item }}" href="#">{{ item }}</a></li>
                   {% endfor %}
-            {% else %}
-            <a>There doesn't seem to be anything here, yet</a>
-            <a>Try searching for an item first</a>
-            {% endif %}
+                    {% endif %}
                 </ul>
             </div>
         </div>

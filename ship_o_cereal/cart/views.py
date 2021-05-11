@@ -1,6 +1,66 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.contrib.sessions.models import Session
+from main.models import ShoppingCart, Items, CartContains
+import json
 
 # Create your views here.
 def index(request):
     return render(request, 'cart/index.html')
+
+
+def update_item(request):
+    data = json.loads(request.data)
+    itemID = data['ItemID']
+    action = data['action']
+    quantity = int(data['quantity'])
+
+    product = Items.objects.get(ItemID=itemID)
+    # check first if item is available
+    if product.Quantity_available <= 0 and action == 'add':
+        return JsonResponse({'error': 'Failed to update cart, no available in stock'}, safe=False)
+    if request.session.session_key is None:
+        request.session.create()
+    customer = Session.objects.get(session_key=request.session.session_key)
+
+    cart = get_or_create_cart(customer)
+    # add item to cart
+    cart_contains = get_or_create_cart_contains(product, cart)
+    if quantity > 1:
+        cart_contains.Quantity = quantity
+    elif quantity == 1 or action == 'add':
+        cart_contains.Quantity += 1
+    elif action == 'remove':
+        cart_contains.Quantity -= 1
+    elif quantity == 0:
+        cart_contains.Quantity = 0
+    else:
+        return JsonResponse({'error': 'Failed to update, unknown action'}, safe=False)
+    # remove item from cart if  it's quantity is 0 after add/remove
+    if cart_contains.Quantity == 0:
+        cart.ItemsInCart.remove(cart_contains)
+        cart_contains.delete()
+        cart.save()
+    # Cart successfully updated hereafter
+    cart_contains.save()
+    cart.save()
+    return JsonResponse('Item updated', safe=False)
+
+def get_or_create_cart(customer):
+    try:
+        cart = ShoppingCart.objects.get(SessionID=customer.session_key)
+    except ShoppingCart.DoesNotExist:
+        cart = ShoppingCart(SessionID=customer.session_key)
+        cart.save()
+    return cart
+
+def get_or_create_cart_contains(product, cart):
+    #get the instance that's being changed from shoppingcart.itemsincart with the itemid, or create a new one
+    try:
+        cart_contains = cart.ItemsInCart.get(ItemID=product.ItemID)
+    except ItemsInCart.DoesNotExist:
+        cart_contains = CartContains(ItemID=product.ItemID, Quantity=0)
+        cart_contains.save()
+        cart.ItemsInCart.add(cart_contains)
+        cart.save()
+    return  cart_contains
