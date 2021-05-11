@@ -12,27 +12,27 @@ def index(request):
         search_filter = request.GET['search_filter']
         add_to_history(request.session, search_filter)
 
-        items = []
-        for x in Items.objects.filter(Name__icontains=search_filter):
-            tags = []
-            for tag in x.Tags.all():
-                tags.append(tag.CategoryID)
+        context = {
+            'items': Items.objects.filter(Name__icontains=search_filter),
+            'tags': ItemCategory.objects.all().order_by('CategoryID')
+        }
 
-            ble = {
-                'ItemID': x.ItemID,
-                'Name': x.Name,
-                'Description': x.Description,
-                'Image': x.Image,
-                'Price': x.Price,
-                'Tags': tags
-            }
-            items.append(ble)
-
-        return JsonResponse({'data': items})
-
-    context = {'items': Items.objects.all().order_by('Name'), 'tags': ItemCategory.objects.all().order_by('CategoryID')}
+    else:
+        context = {'items': Items.objects.all().order_by('Name'), 'tags': ItemCategory.objects.all().order_by('CategoryID')}
     return render(request, 'catalogue/index.html', context)
 
+def get_tags(request):
+    items = []
+    for x in Items.objects.filter(Name__icontains=search_filter):
+        tags = []
+        for tag in x.Tags.all():
+            tags.append(tag.CategoryID)
+        ble = {
+            'ItemID': x.ItemID,
+            'Tags': tags
+        }
+        items.append(ble)
+    return JsonResponse({'data': items})
 
 def add_to_history(session, searchstr):
     if session.session_key == None:
