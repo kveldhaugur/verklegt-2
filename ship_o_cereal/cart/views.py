@@ -37,14 +37,15 @@ def update_item(request):
         cart_contains.Quantity = 0
     else:
         return JsonResponse({'error': 'Failed to update, unknown action'}, safe=False)
+    # Cart successfully updated hereafter
     # remove item from cart if  it's quantity is 0 after add/remove
     if cart_contains.Quantity == 0:
         cart.ItemsInCart.remove(cart_contains)
         cart_contains.delete()
         cart.save()
-    # Cart successfully updated hereafter
-    cart_contains.save()
-    cart.save()
+    else:
+        cart_contains.save()
+        cart.save()
     return JsonResponse('Item updated', safe=False)
 
 def get_or_create_cart(customer):
