@@ -1,7 +1,6 @@
-var recentSearch = '';
 var filteredArr = [];
 
-$(function() {
+/*$(function() {
   $('#search-box').keypress(function(e) {
     var key = e.which;
     if (key == 13) // the enter key code
@@ -10,20 +9,7 @@ $(function() {
       return false;
     }
   });
-});
-
-
-$(document).ready(function() {
-    $('#search-btn').on('click', function(e) {
-        e.preventDefault();
-        var searchText = $('#search-box').val();
-        recentSearch = searchText;
-
-        performAjax((searchText))
-
-    });
-});
-
+});*/
 
 function sortByProperty(property){
    return function(a,b){
@@ -52,7 +38,7 @@ $(document).ready(function() {
         e.preventDefault();
         var selectedOption = $(this).children("option:selected").val();
         $.ajax( {
-            url: '/catalogue/?search_filter=' + recentSearch,
+            url: 'get_tags/?search_filter=' + recentSearch,
             type: 'GET',
             success: function(resp) {
                 if (selectedOption === 'lth') {
@@ -95,7 +81,7 @@ $(document).ready(function() {
 });
 
 
-$(document).ready(function() {
+/*$(document).ready(function() {
     $('#search-btn').on('click', function(e) {
         e.preventDefault();
 
@@ -125,7 +111,7 @@ $(document).ready(function() {
             }
         })
     });
-});
+});*/
 
 
 $(document).ready(function() {
@@ -134,7 +120,7 @@ $(document).ready(function() {
         e.preventDefault();
         var selectedOption = Number($(this).children("option:selected").val());
         $.ajax( {
-            url: '/catalogue/?search_filter=' + recentSearch,
+            url: 'get_tags/?search_filter=' + recentSearch,
             type: 'GET',
             success: function(resp) {
                 var newArr = resp.data
@@ -175,39 +161,26 @@ function ShowHistory() {
     x.classList.toggle("show")
 }
 
-var sendToCatalogue = function() {
-    if (window.location.pathname !== '/catalogue/') {
-        window.location.replace('/catalogue/');
-    };
-}
-
-
-$(document).ready(function() {
+/*$(document).ready(function() {
     $('.search-btn').on('click', function(e) {
         e.preventDefault();
 
         var searchText = $('#search-box').val();
         recentSearch = searchText;
-        moveToCatalogue();
+        //moveToCatalogue();
         performAjax(searchText);
     });
-});
-
-function moveToCatalogue() {
-    if (window.location.pathname !== '/catalogue/') {
-        window.location.replace('/catalogue/');
-    };
-};
+});*/
 
 function performAjax (searchText) {
     $.ajax( {
             url: '/catalogue/?search_filter=' + searchText,
             type: 'GET',
-            beforeSend: function() {
+            /*beforeSend: function() {
                if (window.location.pathname !== '/catalogue/') {
                     window.location.replace('/catalogue/');
                 };
-            },
+            },*/
             success: function(resp) {
                 var newHtml = resp.data.map(d => {
                     return `<div class="card" style="width: 18rem;">

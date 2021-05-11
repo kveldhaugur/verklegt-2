@@ -8,27 +8,40 @@ from django.contrib.sessions.models import Session
 
 # Create your views here.
 def index(request):
-    if 'search_filter' in request.GET:
-        search_filter = request.GET['search_filter']
+    print(request.POST)
+    if 'search_filter' in request.POST:
+        search_filter = request.POST['search_filter']
         add_to_history(request.session, search_filter)
 
         context = {
             'items': Items.objects.filter(Name__icontains=search_filter),
-            'tags': ItemCategory.objects.all().order_by('CategoryID')
+            'tags': ItemCategory.objects.all().order_by('CategoryID'),
+            'recentSearch': search_filter
         }
 
     else:
-        context = {'items': Items.objects.all().order_by('Name'), 'tags': ItemCategory.objects.all().order_by('CategoryID')}
+        context = {
+            'items': Items.objects.all().order_by('Name'),
+            'tags': ItemCategory.objects.all().order_by('CategoryID'),
+            'recentSearch': ''
+        }
     return render(request, 'catalogue/index.html', context)
 
 def get_tags(request):
     items = []
+    search_filter = ""
+    if 'search_filter' in request.GET:
+        search_filter = request.GET['search_filter']
     for x in Items.objects.filter(Name__icontains=search_filter):
         tags = []
         for tag in x.Tags.all():
             tags.append(tag.CategoryID)
         ble = {
             'ItemID': x.ItemID,
+            'Name': x.Name,
+            'Description': x.Description,
+            'Image': x.Image,
+            'Price': x.Price,
             'Tags': tags
         }
         items.append(ble)

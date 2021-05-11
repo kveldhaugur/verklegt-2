@@ -19,8 +19,11 @@
         </li>
       </ul>
         <div class="search-container">
-          <input class="form-control me-2" type="search" id="search-box" placeholder="Type to search" aria-label="Search">
-          <button class="btn btn-outline-success" id="search-btn" type="submit">Search</button>
+          <form method=POST action="{% url 'catalogue-index' %}">
+            {% csrf_token %}
+            <input class="form-control me-2" type="search" id="search-box" placeholder="Type to search" aria-label="Search" name="search_filter">
+            <button class="btn btn-outline-success" id="search-btn" type="submit" >Search</button>
+          </form>
           <button class="btn btn-outline-success" id="history-btn" onclick="ShowHistory()"><img src="/static/images/history.png" style="width: 2rem"></button>
           <div id="history_container" class="history_container">
             {% if history != None %}
