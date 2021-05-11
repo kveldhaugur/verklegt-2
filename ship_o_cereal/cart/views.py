@@ -10,7 +10,8 @@ def index(request):
 
 
 def update_item(request):
-    data = json.loads(request.data)
+    data = json.loads(request.body)
+
     itemID = data['ItemID']
     action = data['action']
     quantity = int(data['quantity'])
@@ -25,7 +26,7 @@ def update_item(request):
 
     cart = get_or_create_cart(customer)
     # add item to cart
-    cart_contains = get_or_create_cart_contains(product, cart)
+    cart_contains = get_or_create_cart_contains(product, cart, customer)
     if quantity > 1:
         cart_contains.Quantity = quantity
     elif quantity == 1 or action == 'add':
@@ -36,30 +37,33 @@ def update_item(request):
         cart_contains.Quantity = 0
     else:
         return JsonResponse({'error': 'Failed to update, unknown action'}, safe=False)
+    # Cart successfully updated hereafter
     # remove item from cart if  it's quantity is 0 after add/remove
     if cart_contains.Quantity == 0:
         cart.ItemsInCart.remove(cart_contains)
         cart_contains.delete()
         cart.save()
-    # Cart successfully updated hereafter
-    cart_contains.save()
-    cart.save()
+    else:
+        cart_contains.save()
+        cart.save()
     return JsonResponse('Item updated', safe=False)
 
 def get_or_create_cart(customer):
     try:
         cart = ShoppingCart.objects.get(SessionID=customer.session_key)
     except ShoppingCart.DoesNotExist:
-        cart = ShoppingCart(SessionID=customer.session_key)
+        cart = ShoppingCart(SessionID=customer)
         cart.save()
     return cart
 
-def get_or_create_cart_contains(product, cart):
+def get_or_create_cart_contains(product, cart, customer):
     #get the instance that's being changed from shoppingcart.itemsincart with the itemid, or create a new one
     try:
-        cart_contains = cart.ItemsInCart.get(ItemID=product.ItemID)
-    except ItemsInCart.DoesNotExist:
-        cart_contains = CartContains(ItemID=product.ItemID, Quantity=0)
+        items_in_cart = cart.ItemsInCart.all()
+        #cart_contains = items_in_cart.filter(ItemID=product.ItemID)
+        cart_contains = items_in_cart.filter(ItemID=product.ItemID)[0]
+    except (CartContains.DoesNotExist, IndexError) as e:
+        cart_contains = CartContains(ItemID=product, Quantity=0)
         cart_contains.save()
         cart.ItemsInCart.add(cart_contains)
         cart.save()

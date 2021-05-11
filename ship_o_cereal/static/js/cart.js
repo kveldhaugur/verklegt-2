@@ -12,7 +12,6 @@ for(var i = 0; i < updateBtns.length; i++) {
             console.log('Not logged in')
         }
         updateUserOrder(ItemID, action, quantity)
-
     })
 }
 
