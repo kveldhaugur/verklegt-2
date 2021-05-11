@@ -21,17 +21,21 @@
         <div class="search-container">
           <input class="form-control me-2" type="search" id="search-box" placeholder="Type to search" aria-label="Search">
           <button class="btn btn-outline-success" id="search-btn" type="submit">Search</button>
-          <button class="btn btn-outline-success" id="history-btn" onclick="ShowHistory()"><img src="/static/images/history.png" style="width: 2rem"></button>
-          <div id="history_container" class="history_container">
-            {% if history != None %}
-              {% for item in history %}
-                <button class="search-btn" id="{{ item }}-historystr" value="{{ item }}" style="display: block; width: 10rem">{{ item }}</button>
-              {% endfor %}
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="/static/images/history.png" style="width: 2rem">
+                </button>
+                <ul class="dropdown-menu">
+                  {% if history != None %}
+                  {% for item in history %}
+                  <li><a class="dropdown-item" id="{{ item }}-historystr" value="{{ item }}" href="#">{{ item }}</a></li>
+                  {% endfor %}
             {% else %}
             <a>There doesn't seem to be anything here, yet</a>
             <a>Try searching for an item first</a>
             {% endif %}
-          </div>
+                </ul>
+            </div>
         </div>
 
     {% if user.is_authenticated %}

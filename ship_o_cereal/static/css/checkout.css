@@ -5,3 +5,13 @@
 .badge bg-primary rounded-pill {
     color: #6862f1;
 }
+
+
+
+.mb-3 {
+    margin-top: 2rem;
+}
+
+.btn-primary {
+    margin-bottom: 3rem;
+}

@@ -131,3 +131,22 @@ a {
   from {opacity: 0;}
   to {opacity:1 ;}
 }
+.btn-danger{
+ 	background-color: #efeefd;
+	color: black;
+	border-color: white;
+	margin-left: 0.3rem;
+}
+
+.btn-danger:hover{
+ 	background-color: #6862f1;
+	border: 0;
+}
+
+.btn-danger:focus{
+ 	background-color: #6862f1;
+	border: 0;
+	box-shadow: 0 0 0 0.25rem rgb(104 98 241 / 50%);
+
+
+}

@@ -2,18 +2,26 @@
 {% load static %}
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
-    <p>Home > cart</p>
+    <p></p>
+
     <div class="cart-big-container">
         <div class="products-container">
             <div class="product">
-                <img src="/static/images/Items/Waffleos.jpg" style="max-width: 6rem;" alt="">
+                <img class="cart-product-img" src="/static/images/Items/Waffleos.jpg" style="max-width: 6rem;" alt="">
                 <div><p>Some product name</p></div>
                 <div><p>516 kr</p></div>
-                <div><p>1</p></div>
+                <div>
+
+                    <div class="quantity">
+                        <img class="chg-quantity" src="{% static 'images/arrow-up.png' %}" alt="">
+                        <p class="quantity">1</p>
+                        <img class="chg-quantity" src="{% static 'images/arrow-down.png' %}" alt="">
+                    </div>
+                </div>
             </div>
 
-
         </div>
+
 
 
         <div class="checkout-final">
@@ -64,10 +72,12 @@
               </div>
             </form>
           </div>
+            <a href="/checkout/" class="btn btn-primary">Proceed to checkout</a>
+
         </div>
 
     </div>
     <div>
-    <p>Back to shop</p>
+    <button class="btn-primary">Back to shop</button>
     </div>
 {% endblock %}
