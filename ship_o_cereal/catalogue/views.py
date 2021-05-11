@@ -77,3 +77,5 @@ def create_item(request):
     return render(request, 'catalogue/create_item.html', {
         'form': form
     })
+
+def edit_cart(request):
