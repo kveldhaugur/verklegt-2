@@ -10,16 +10,16 @@ for(var i = 0; i < updateBtns.length; i++) {
         console.log('USER', user)
         if (user === 'AnonymousUser') {
             console.log('Not logged in')
-        } else {
-            updateUserOrder(ItemID, action, quantity)
         }
+        updateUserOrder(ItemID, action, quantity)
+
     })
 }
 
-function updateUserOrder(ItemID, action) {
+function updateUserOrder(ItemID, action, quantity) {
     console.log('User is logged in, sending data')
 
-    var url = '/update_item/'
+    var url = '/cart/edit_item/'
 
     fetch(url, {
         method: 'POST',

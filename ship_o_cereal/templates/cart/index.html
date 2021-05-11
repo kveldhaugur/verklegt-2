@@ -13,9 +13,9 @@
                 <div>
 
                     <div class="quantity">
-                        <img class="chg-quantity" src="{% static 'images/arrow-up.png' %}" alt="">
+                        <img class="chg-quantity update-cart" data-product="{{item.ItemID}}" data-action="add"  src="{% static 'images/arrow-up.png' %}" alt="">
                         <p class="quantity">1</p>
-                        <img class="chg-quantity" src="{% static 'images/arrow-down.png' %}" alt="">
+                        <img class="chg-quantity update-cart" data-product="{{item.ItemID}}" data-action="remove" src="{% static 'images/arrow-down.png' %}" alt="">
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ from main.models import Items, ItemCategory, SessionHistory
 from django.contrib.sessions.models import Session
 
 
+
 # Create your views here.
 def index(request):
     print(request.POST)

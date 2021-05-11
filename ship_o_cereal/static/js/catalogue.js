@@ -11,6 +11,11 @@ var filteredArr = [];
   });
 });*/
 
+function searchFromHistory(object) {
+    $('#search-box').val(object);
+    document.searchForm.submit();
+}
+
 function sortByProperty(property){
    return function(a,b){
       if(a[property] > b[property])
@@ -63,7 +68,7 @@ $(document).ready(function() {
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                                    <button data-quantity="1" data-item={{item.ItemID}} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
                                
                                 </div>
                             </a>
@@ -97,7 +102,7 @@ $(document).ready(function() {
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                                    <button data-quantity="1" data-item={{item.ItemID}} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
                                 </div>
                             </a>
                         </div>`
@@ -139,7 +144,7 @@ $(document).ready(function() {
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                                    <button data-quantity="1" data-item={{item.ItemID}} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
                                     
                                 </div>
                             </a>
@@ -190,7 +195,7 @@ function performAjax (searchText) {
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                                    <button data-quantity="1" data-item={{item.ItemID}} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
                                 </div>
                             </a>
                         </div>`
