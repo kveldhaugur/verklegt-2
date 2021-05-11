@@ -25,7 +25,7 @@
           <div id="history_container" class="history_container">
             {% if history != None %}
               {% for item in history %}
-                <button id="{{ item }}-historystr" value="{{ item }}" style="display: block; width: 10rem">{{ item }}</button>
+                <button class="search-btn" id="{{ item }}-historystr" value="{{ item }}" style="display: block; width: 10rem">{{ item }}</button>
               {% endfor %}
             {% else %}
             <a>There doesn't seem to be anything here, yet</a>
