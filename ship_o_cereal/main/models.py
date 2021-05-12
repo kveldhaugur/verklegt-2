@@ -92,7 +92,6 @@ class OrderContains(models.Model):
 class Order(models.Model): #has id
     ShippingInfoID = models.ForeignKey(UserInfo, on_delete=models.PROTECT, null=False)
     ItemsInOrder = models.ManyToManyField(OrderContains)
-    TotalPrice = models.IntegerField(null=False)
     DatePurchased = models.DateField(auto_now_add=True, blank=True)
 
 
