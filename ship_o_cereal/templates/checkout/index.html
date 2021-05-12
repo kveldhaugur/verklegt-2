@@ -17,19 +17,21 @@
               {% for item, quantity in items_in_cart %}
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
-                        <h6 class="my-0">{{ item.Name }}</h6>
+                        <h6 class="my-0">{{ quantity }}x {{ item.Name }}</h6>
 
                     </div>
                     <span class="text-muted">{% widthratio item.Price 1 quantity %} kr.</span>
                 </li>
             {% endfor %}
+              {% if promo_name != None %}
                <li class="list-group-item d-flex justify-content-between bg-light">
                 <div class="text-success">
                   <h6 class="my-0">Promo code</h6>
-                  <small>KONRADISCOOL</small>
+                  <small>{{ promo_name }}</small>
                 </div>
-                <span class="text-success">20%</span>
+                <span class="text-success">{{ promo_val }}%</span>
               </li>
+              {% endif %}
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total (ISK)</span>
                 <strong>{{total}}</strong>
