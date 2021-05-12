@@ -6,7 +6,25 @@ import json
 
 # Create your views here.
 def index(request):
-    return render(request, 'cart/index.html')
+    context = {}
+    if request.session.session_key != None:
+        try:
+            cart = ShoppingCart.objects.get(SessionID=request.session.session_key)
+        except ShoppingCart.DoesNotExist:
+            cart = None
+        if cart != None:
+            cart_contains = cart.ItemsInCart.all()
+            items = []
+            for cart_item in cart_contains:
+                item = cart_item.ItemID
+                items.append((item, cart_item.Quantity))
+            context['items_in_cart'] = items
+            return render(request, 'cart/index.html', context)
+    else:
+        request.session.create()
+    context['items_in_cart'] = None
+    context['message'] = "Your cart contains no items, try adding some to the cart"
+    return render(request, 'cart/index.html', context)
 
 
 def update_item(request):
@@ -28,8 +46,12 @@ def update_item(request):
     # add item to cart
     cart_contains = get_or_create_cart_contains(product, cart, customer)
     if quantity > 1:
+        if 0 < product.Quantity_available < quantity:
+            return JsonResponse({'error': 'Failed to update, cannot add more products than are available'}, safe=False)
         cart_contains.Quantity = quantity
     elif quantity == 1 or action == 'add':
+        if product.Quantity_available > (cart_contains.Quantity + 1):
+            return JsonResponse({'error': 'Failed to update, cannot add more products than are available'}, safe=False)
         cart_contains.Quantity += 1
     elif action == 'remove':
         cart_contains.Quantity -= 1
