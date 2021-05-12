@@ -17,7 +17,8 @@ for(var i = 0; i < updateBtns.length; i++) {
 
 function promoCodeValidation() {
     insertedPromo = document.getElementById('promo-box').value
-    totalPrice = document.getElementById('total-price').value
+    totalPrice = document.getElementById('total-price').innerHTML
+
     var url = '/cart/promo/'
 
     fetch(url, {
@@ -36,7 +37,6 @@ function promoCodeValidation() {
         })
         .then((data) =>{
             console.log('data', data)
-            window.location.reload()
         })
 }
 

@@ -59,7 +59,8 @@ def activate_promo(request):
     return JsonResponse(
         {
             'message': 'Promo accepted',
-            'data': total_after_promo
+            'data': total_after_promo,
+            'discount': promo.Discount
         }, safe=False)
 
 
