@@ -67,6 +67,10 @@ class ShippingInfo(models.Model):
     SSN = models.CharField(max_length=255)
     Country = models.ForeignKey(Country, on_delete=models.CASCADE)
 
+class PromoCodes(models.Model): # id
+    Name = models.CharField(max_length=63)
+    Discount = models.FloatField()
+
 
 class CartContains(models.Model):
     ItemID = models.ForeignKey(Items, on_delete=models.CASCADE, null=False)
@@ -76,6 +80,8 @@ class CartContains(models.Model):
 class ShoppingCart(models.Model):
     SessionID = models.ForeignKey(Session, on_delete=models.CASCADE, null=False)
     ItemsInCart = models.ManyToManyField(CartContains)
+    TotalPrice = models.IntegerField(null=True, default=None)
+    Promo = models.ForeignKey(PromoCodes, null=True, default=None, on_delete=models.CASCADE)
 
 
 class OrderContains(models.Model):
@@ -99,8 +105,4 @@ class SessionHistory(models.Model):
     SessionID = models.ForeignKey(Session, on_delete=models.CASCADE, null=False)
     HistoryStr = models.CharField(max_length=255)
 
-
-class PromoCodes(models.Model): # id
-    Name = models.CharField(max_length=63)
-    Discount = models.FloatField()
 # Create your models here.
