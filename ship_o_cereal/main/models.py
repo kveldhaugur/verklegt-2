@@ -80,7 +80,6 @@ class CartContains(models.Model):
 class ShoppingCart(models.Model):
     SessionID = models.ForeignKey(Session, on_delete=models.CASCADE, null=False)
     ItemsInCart = models.ManyToManyField(CartContains)
-    TotalPrice = models.IntegerField(null=True, default=None)
     Promo = models.ForeignKey(PromoCodes, null=True, default=None, on_delete=models.CASCADE)
 
 
@@ -92,7 +91,7 @@ class OrderContains(models.Model):
 class Order(models.Model): #has id
     ShippingInfoID = models.ForeignKey(UserInfo, on_delete=models.PROTECT, null=False)
     ItemsInOrder = models.ManyToManyField(OrderContains)
-    TotalPrice = models.IntegerField(null=False)
+    TotalPrice = models.IntegerField(null=False, default=0)
     DatePurchased = models.DateField(auto_now_add=True, blank=True)
 
 
