@@ -41,6 +41,7 @@ def activate_promo(request):
     try:
         promo = PromoCodes.objects.get(Name=promo_name)
         total_after_promo = round(int(price) - int(price) * promo.Discount, 2)
+
     except PromoCodes.DoesNotExist:
         return JsonResponse({
             'error': 'Promo not found'
@@ -49,7 +50,8 @@ def activate_promo(request):
     return JsonResponse(
         {
             'message': 'Promo accepted',
-            'data': total_after_promo
+            'data': total_after_promo,
+            'discount': promo.Discount
         }, safe=False)
 
 
