@@ -11,7 +11,7 @@
           <div class="col-md-5 col-lg-4 order-md-last ">
             <h4 class="d-flex justify-content-between align-items-center mb-3 ">
               <span class="text-primary">Your cart</span>
-              <span class="badge bg-primary rounded-pill">3</span>
+              <span class="badge bg-primary rounded-pill">{{total_items}}</span>
             </h4>
             <ul class="list-group mb-3">
               {% for item, quantity in items_in_cart %}
@@ -20,7 +20,7 @@
                         <h6 class="my-0">{{ item.Name }}</h6>
 
                     </div>
-                    <span class="text-muted">{{ item.Price }} kr.</span>
+                    <span class="text-muted">{% widthratio item.Price 1 quantity %} kr.</span>
                 </li>
             {% endfor %}
                <li class="list-group-item d-flex justify-content-between bg-light">
@@ -36,6 +36,7 @@
               </li>
             </ul>
 
+<<<<<<< HEAD
             <form class="card p-2" method="post">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Promo code" name="promo-code">

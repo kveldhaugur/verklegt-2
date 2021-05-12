@@ -47,18 +47,24 @@ def index(request):
         context['data'] = info
         context['countries'] = Country.objects.all()
 
-    if request.session.session_key != None:
+    if request.session.session_key is not None:
         try:
             cart = ShoppingCart.objects.get(SessionID=request.session.session_key)
         except ShoppingCart.DoesNotExist:
             cart = None
-        if cart != None:
+        if cart is not None:
             cart_contains = cart.ItemsInCart.all()
             items = []
+            total_price = 0
+            i = 0
             for cart_item in cart_contains:
                 item = cart_item.ItemID
                 items.append((item, cart_item.Quantity))
+                total_price += int(cart_item.Quantity) * item.Price
+                i += 1 * cart_item.Quantity
             context['items_in_cart'] = items
+            context['total'] = total_price
+            context['total_items'] = i
             return render(request, 'checkout/index.html', context)
     else:
         request.session.create()
