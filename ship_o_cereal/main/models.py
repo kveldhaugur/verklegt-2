@@ -42,7 +42,7 @@ class Country(models.Model):
         return f'{self.CountryName}'
 
 class UserInfo(models.Model):
-    AccountConnected = models.ForeignKey(User, primary_key=True, on_delete=models.CASCADE)
+    AccountConnected = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
     FirstName = models.CharField(max_length=255)
     LastName = models.CharField(max_length=255)
     City = models.CharField(max_length=255)
@@ -84,7 +84,7 @@ class OrderContains(models.Model):
 
 
 class Order(models.Model): #has id
-    ShippingInfoID = models.ForeignKey(ShippingInfo, on_delete=models.PROTECT, null=False)
+    ShippingInfoID = models.ForeignKey(UserInfo, on_delete=models.PROTECT, null=False)
     ItemsInOrder = models.ManyToManyField(OrderContains)
     TotalPrice = models.IntegerField(null=False)
     DatePurchased = models.DateField(auto_now_add=True, blank=True)

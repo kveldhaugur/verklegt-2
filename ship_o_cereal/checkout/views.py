@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from main.models import UserInfo, Country, UserImage, ShoppingCart, PromoCodes
+from main.models import UserInfo, Country, UserImage, ShoppingCart, PromoCodes, Order, OrderContains, Items
+from django.contrib.sessions.models import Session
 import re
 import datetime
 
@@ -11,7 +12,10 @@ def index(request):
     if request.method == 'POST':
         # validate user and creditcard
         result, message = validate_payment(request.POST)
-        #confirmation page goes here
+        if result:
+            #throw it all into an order
+            create_order(request)
+            return render(request, 'confirmation.html thingy')#confirmation page goes here
 
     else:
         context = {
@@ -88,6 +92,7 @@ def validate_payment(post):
         return False, message
     return True, 'Validation successful'
 
+
 def validate_user(user_info):
     if user_info['FirstName'].isalpha() == False:
         return False, 'firstname contains bad chars'
@@ -104,6 +109,7 @@ def validate_user(user_info):
     if user_info['PostalCode'].isdigit() == False:
         return False, 'ZIP/postal code is not a number'
     return True, 'user info validated'
+
 
 def validate_cc(credit_info):
     if credit_info['CCName'].isalpha() == False:
@@ -126,6 +132,7 @@ def validate_cc(credit_info):
                     return True, 'card validated'
     return False, 'bad cc expiry date'
 
+
 def validate_creditcard(cardnum):
     if '-' in cardnum:
         cardnum = cardnum.replace("-", " ")
@@ -134,3 +141,47 @@ def validate_creditcard(cardnum):
         if cardnum.isdigit():
             return True
     return False
+
+
+def create_order(request):
+    cart = ShoppingCart.objects.get(SessionID=request.session.session_key)
+    itemsincart = cart.ItemsInCart.all()
+    order_items = []
+    for item in itemsincart:
+        product = Items.objects.get(ItemID=item.ItemID)
+        order_item = OrderContains(Quantity=item.Quantity, ItemID=product)
+        order_item.save()
+        order_items.append(order_item)
+    if request.user.is_authenticated():
+        user = User.models.get(id=request.user.id)
+        try: # to get user info
+            shippinginfo = UserInfo.objects.get(AccountConnected=user)
+        except UserInfo.DoesNotExist:
+            shippinginfo = create_shipping_info(request.POST, user=user)
+    else:
+        shippinginfo = create_shipping_info(request.POST, user=None)
+    order = Order(ShippingInfoID=shippinginfo, TotalPrice=request.POST['total']) # 'total' may be subject to change
+    for item in order_items:
+        order.ItemsInOrder.add(item)
+    order.save()
+    
+
+
+
+def create_shipping_info(post, user=None):
+    country = Country.objects.get(CountryName=post['Country'])
+    shippinginfo = UserInfo(
+        AccountConnected=user,
+        FirstName=post['FirstName'],
+        LastName=POST['LastName'],
+        City=post['City'],
+        PostalCode=post['PostalCode'],
+        Address=post['Address'],
+        HouseNum=post['HouseNum'],
+        MobilePhone=post['MobilePhone'],
+        Email=post['Email'],
+        SSN=post['SSN'],
+        Country=country
+    )
+    shippinginfo.save()
+    return shippinginfo
