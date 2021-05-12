@@ -90,8 +90,6 @@ def update_item(request):
     else:
         cart_contains.save()
         cart.save()
-    if request.path == '/cart/edit_item':
-        return render(request, )
     return JsonResponse('Item updated', safe=False)
 
 
