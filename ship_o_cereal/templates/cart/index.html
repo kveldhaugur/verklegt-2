@@ -41,7 +41,7 @@
                         <h6 class="my-0">{{ item.Name }}</h6>
 
                     </div>
-                    <span class="text-muted">{{ item.Price }} kr.</span>
+                    <span class="text-muted">{% widthratio item.Price 1 quantity %} kr.</span>
                 </li>
             {% endfor %}
               <li class="list-group-item d-flex justify-content-between bg-light">
