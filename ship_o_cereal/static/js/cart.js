@@ -15,6 +15,31 @@ for(var i = 0; i < updateBtns.length; i++) {
     })
 }
 
+function promoCodeValidation() {
+    insertedPromo = document.getElementById('promo-box').value
+    totalPrice = document.getElementById('total-price').value
+    var url = '/cart/promo/'
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body:JSON.stringify({
+            'promo_name': insertedPromo,
+            'total_price': totalPrice
+        })
+    })
+        .then((response) =>{
+            return response.json()
+        })
+        .then((data) =>{
+            console.log('data', data)
+            window.location.reload()
+        })
+}
+
 function updateUserOrder(ItemID, action, quantity) {
     console.log('User is logged in, sending data')
 

@@ -35,6 +35,7 @@ def index(request):
 
 def activate_promo(request):
     data = json.loads(request.body)
+    print(request.body)
     promo_name = data['promo_name']
     price = data['total_price']
     try:
