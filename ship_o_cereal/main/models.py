@@ -30,6 +30,7 @@ class Items(models.Model):
     Name = models.CharField(max_length=255)
     Description = models.CharField(max_length=9999, blank=True)
     Image = models.CharField(max_length=255, null=True)
+    Image_extra = models.CharField(max_length=255, null=True)
     Tags = models.ManyToManyField(ItemCategory)
     def __str__(self):
         return self.Name
@@ -86,6 +87,7 @@ class Order(models.Model): #has id
     ShippingInfoID = models.ForeignKey(ShippingInfo, on_delete=models.PROTECT, null=False)
     ItemsInOrder = models.ManyToManyField(OrderContains)
     TotalPrice = models.IntegerField(null=False)
+    DatePurchased = models.DateField(auto_now_add=True, blank=True)
 
 
 class UserImage(models.Model):
@@ -98,7 +100,7 @@ class SessionHistory(models.Model):
     HistoryStr = models.CharField(max_length=255)
 
 
-class PromoCodes(models.Model):
+class PromoCodes(models.Model): # id
     Name = models.CharField(max_length=63)
     Discount = models.FloatField()
 # Create your models here.
