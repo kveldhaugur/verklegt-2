@@ -42,7 +42,7 @@ class Country(models.Model):
         return f'{self.CountryName}'
 
 class UserInfo(models.Model):
-    AccountConnected = models.ForeignKey(User, primary_key=True, on_delete=models.CASCADE)
+    AccountConnected = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
     FirstName = models.CharField(max_length=255)
     LastName = models.CharField(max_length=255)
     City = models.CharField(max_length=255)

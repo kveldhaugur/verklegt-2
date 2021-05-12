@@ -11,6 +11,7 @@ def index(request):
     if request.method == 'POST':
         # validate user and creditcard
         result, message = validate_payment(request.POST)
+        #throw it all into an order
         #confirmation page goes here
 
     else:
