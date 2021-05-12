@@ -46,7 +46,7 @@ def activate_promo(request):
     price = data['total_price']
     try:
         promo = PromoCodes.objects.get(Name=promo_name)
-        cart = ShoppingCart.objects.get(SessionID=customer.session_key)
+        cart = ShoppingCart.objects.get(SessionID=request.session.session_key)
         cart.Promo = promo
         cart.save()
         total_after_promo = round(int(price) - int(price) * promo.Discount, 2)
