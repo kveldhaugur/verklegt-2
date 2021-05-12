@@ -90,6 +90,7 @@ def update_item(request):
     else:
         cart_contains.save()
         cart.save()
+
     return JsonResponse('Item updated', safe=False)
 
 
