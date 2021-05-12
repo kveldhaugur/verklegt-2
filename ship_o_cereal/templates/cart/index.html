@@ -46,7 +46,15 @@
             {% endfor %}
 
             <div id="promo-container">
-
+                {% if promo_name is not None %}
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                    <div class="text-success">
+                        <h6 class="my-0">Promo code</h6>
+                        <small>{{promo_name}}</small>
+                    </div>
+                    <span class="text-success">{% widthratio promoval 1 100 %}%</span>
+                </li>
+                {% endif %}
             </div>
 
 
