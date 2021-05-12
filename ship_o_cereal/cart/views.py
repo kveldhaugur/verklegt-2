@@ -1,30 +1,52 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.sessions.models import Session
-from main.models import ShoppingCart, Items, CartContains
+from main.models import ShoppingCart, Items, CartContains, PromoCodes
 import json
 
 # Create your views here.
 def index(request):
     context = {}
-    if request.session.session_key != None:
+    if request.session.session_key is not None:
         try:
             cart = ShoppingCart.objects.get(SessionID=request.session.session_key)
         except ShoppingCart.DoesNotExist:
             cart = None
-        if cart != None:
+        if cart is not None:
             cart_contains = cart.ItemsInCart.all()
             items = []
+            total_price = 0
             for cart_item in cart_contains:
                 item = cart_item.ItemID
                 items.append((item, cart_item.Quantity))
+                total_price += int(cart_item.Quantity) * item.Price
             context['items_in_cart'] = items
+            context['total'] = total_price
             return render(request, 'cart/index.html', context)
     else:
         request.session.create()
     context['items_in_cart'] = None
     context['message'] = "Your cart contains no items, try adding some to the cart"
     return render(request, 'cart/index.html', context)
+
+
+def activate_promo(request):
+    data = json.loads(request.body)
+    promo_name = data['promo_name']
+    price = data['total_price']
+    try:
+        promo = PromoCodes.objects.get(Name=promo_name)
+        total_after_promo = round(int(price) - int(price) * promo.Discount, 2)
+    except PromoCodes.DoesNotExist:
+        return JsonResponse({
+            'error': 'Promo not found'
+        }, safe=False)
+
+    return JsonResponse(
+        {
+            'message': 'Promo accepted',
+            'data': total_after_promo
+        }, safe=False)
 
 
 def update_item(request):
@@ -70,6 +92,7 @@ def update_item(request):
         cart.save()
     return JsonResponse('Item updated', safe=False)
 
+
 def get_or_create_cart(customer):
     try:
         cart = ShoppingCart.objects.get(SessionID=customer.session_key)
@@ -78,15 +101,16 @@ def get_or_create_cart(customer):
         cart.save()
     return cart
 
+
 def get_or_create_cart_contains(product, cart, customer):
-    #get the instance that's being changed from shoppingcart.itemsincart with the itemid, or create a new one
+    # get the instance that's being changed from shoppingcart.itemsincart with the itemid, or create a new one
     try:
         items_in_cart = cart.ItemsInCart.all()
-        #cart_contains = items_in_cart.filter(ItemID=product.ItemID)
+        # cart_contains = items_in_cart.filter(ItemID=product.ItemID)
         cart_contains = items_in_cart.filter(ItemID=product.ItemID)[0]
     except (CartContains.DoesNotExist, IndexError) as e:
         cart_contains = CartContains(ItemID=product, Quantity=0)
         cart_contains.save()
         cart.ItemsInCart.add(cart_contains)
         cart.save()
-    return  cart_contains
+    return cart_contains
