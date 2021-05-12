@@ -25,6 +25,12 @@ def index(request):
             context['items_in_cart'] = items
             context['total'] = total_price
             context['total_items'] = i
+            if cart.Promo is not None:
+                context['promo_name'] = cart.Promo.Name
+                context['promo_val'] = 1 + cart.Promo.Discount
+            else:
+                context['promo_name'] = None
+                context['promo_val'] = 1
             return render(request, 'cart/index.html', context)
     else:
         request.session.create()
@@ -40,7 +46,11 @@ def activate_promo(request):
     price = data['total_price']
     try:
         promo = PromoCodes.objects.get(Name=promo_name)
+        cart = ShoppingCart.objects.get(SessionID=customer.session_key)
+        cart.Promo = promo
+        cart.save()
         total_after_promo = round(int(price) - int(price) * promo.Discount, 2)
+
     except PromoCodes.DoesNotExist:
         return JsonResponse({
             'error': 'Promo not found'
