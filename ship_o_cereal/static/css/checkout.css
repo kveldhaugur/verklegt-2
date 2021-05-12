@@ -26,3 +26,7 @@
 .btn-secondary:hover {
     background-color: #443ec7!important;
 }
+
+#cc-expiration-month {
+    margin: 0;
+}
