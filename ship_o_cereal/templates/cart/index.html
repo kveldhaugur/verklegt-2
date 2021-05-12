@@ -7,27 +7,20 @@
     <div class="cart-big-container">
         <div class="products-container">
             {% if items_in_cart != None %}
-            {% for item in items_in_cart %}
-            {% for thing in item %}
-            {% if forloop.counter0 == 0 %}
+            {% for item, quantity in items_in_cart %}
             <div class="product">
-                <img class="cart-product-img" src="/static/images/Items/{{ thing.Image }}" style="max-width: 6rem;" alt="">
-                <div><p>{{ thing.Name }}</p></div>
-                <div><p>{{ thing.Price }}</p></div>
+                <img class="cart-product-img" src="/static/images/Items/{{ item.Image }}" style="max-width: 6rem;" alt="">
+                <div><p>{{ item.Name }}</p></div>
+                <div><p>{{ item.Price }}</p></div>
                 <div>
 
                     <div class="quantity">
-                        <img class="chg-quantity update-cart" data-product="{{ thing.ItemID }}" data-action="add"  src="{% static 'images/arrow-up.png' %}" alt="">
-                        {% else %}
-                        <p class="quantity">{{ thing }}</p>
-                        {% endif %}
-                        {% if forloop.counter0 == 0 %}
-                        <img class="chg-quantity update-cart" data-product="{{ thing.ItemID }}" data-action="remove" src="{% static 'images/arrow-down.png' %}" alt="">
+                        <img class="chg-quantity update-cart" data-product="{{ item.ItemID }}" data-action="add"  src="{% static 'images/arrow-up.png' %}" alt="">
+                        <p class="quantity">{{ quantity }}</p>
+                        <img class="chg-quantity update-cart" data-product="{{ item.ItemID }}" data-action="remove" src="{% static 'images/arrow-down.png' %}" alt="">
                     </div>
                 </div>
             </div>
-            {% endif %}
-            {% endfor %}
             {% endfor %}
             {% else %}
             <p>{{ message }}</p>
