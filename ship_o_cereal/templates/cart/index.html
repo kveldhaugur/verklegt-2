@@ -14,9 +14,9 @@
                 <div><p>{{ item.Price }} kr.</p></div>
                 <div>
                     <div class="quantity">
-                        <img class="chg-quantity update-cart" data-product="{{ item.ItemID }}" data-action="add"  src="{% static 'images/arrow-up.png' %}" alt="">
+                        <img class="chg-quantity update-cart" data-quantity="1" data-item="{{ item.ItemID }}" data-action="add"  src="{% static 'images/arrow-up.png' %}" alt="">
                         <p class="quantity">{{ quantity }}</p>
-                        <img class="chg-quantity update-cart" data-product="{{ item.ItemID }}" data-action="remove" src="{% static 'images/arrow-down.png' %}" alt="">
+                        <img class="chg-quantity update-cart" data-quantity="1" data-item="{{ item.ItemID }}" data-action="remove" src="{% static 'images/arrow-down.png' %}" alt="">
                     </div>
                 </div>
             </div>

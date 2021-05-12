@@ -12,12 +12,12 @@
                 <p>${{ item.Price }}</p>
                 <div class="cart-adder">
                     <input type="number" class="form-fill" id="add-to-cart-amount-btn" placeholder="Amount">
-                    <button class="add-to-cart-btn">Add to cart</button>
+                    <button data-quantity="1" data-item={{item.ItemID}} data-action="add" class="add-to-cart-btn update-cart">Add to cart</button>
                 </div>
                 <div class="tag-container">
                     {% for tag in item.Tags %}
                     <div class="item-tag">{{tag}}</div>
-                    {% endfor %}    
+                    {% endfor %}
                 </div>
 
 

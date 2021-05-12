@@ -16,12 +16,15 @@ def index(request):
             cart_contains = cart.ItemsInCart.all()
             items = []
             total_price = 0
+            i = 0
             for cart_item in cart_contains:
                 item = cart_item.ItemID
                 items.append((item, cart_item.Quantity))
                 total_price += int(cart_item.Quantity) * item.Price
+                i += 1 * cart_item.Quantity
             context['items_in_cart'] = items
             context['total'] = total_price
+            context['total_items'] = i
             return render(request, 'cart/index.html', context)
     else:
         request.session.create()
@@ -52,9 +55,9 @@ def activate_promo(request):
 def update_item(request):
     data = json.loads(request.body)
 
-    itemID = data['ItemID']
-    action = data['action']
-    quantity = int(data['quantity'])
+    itemID = data['ItemID'] #21312
+    action = data['action'] #add
+    quantity = int(data['quantity']) #1
 
     product = Items.objects.get(ItemID=itemID)
     # check first if item is available
@@ -71,8 +74,8 @@ def update_item(request):
         if 0 < product.Quantity_available < quantity:
             return JsonResponse({'error': 'Failed to update, cannot add more products than are available'}, safe=False)
         cart_contains.Quantity = quantity
-    elif quantity == 1 or action == 'add':
-        if product.Quantity_available > (cart_contains.Quantity + 1):
+    elif quantity == 1 and action == 'add':
+        if product.Quantity_available < (cart_contains.Quantity + 1):
             return JsonResponse({'error': 'Failed to update, cannot add more products than are available'}, safe=False)
         cart_contains.Quantity += 1
     elif action == 'remove':
@@ -90,6 +93,7 @@ def update_item(request):
     else:
         cart_contains.save()
         cart.save()
+
     return JsonResponse('Item updated', safe=False)
 
 
