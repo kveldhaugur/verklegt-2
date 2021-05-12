@@ -156,7 +156,7 @@ Thumbs.db
 
 # profiling data
 .prof
-
+*/.idea
 ship_o_cereal/.idea/
 .idea/dataSources.xml
 .idea/
