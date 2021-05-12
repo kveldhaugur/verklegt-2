@@ -114,7 +114,7 @@ a {
 	visibility: hidden;
 	position: absolute;
 	width: 10rem;
-	right: 0%;
+	right: 0;
 	top: 100%;
 }
 
@@ -138,6 +138,7 @@ a {
 	color: black;
 	border-color: white;
 	margin-left: 0.3rem;
+
 }
 
 .btn-danger:hover{
@@ -148,6 +149,6 @@ a {
 .btn-danger:focus{
  	background-color: #6862f1;
 	border: 0;
-	box-shadow: 0 0 0 0.25rem rgb(104 98 241);
+	box-shadow: none;
 
 }
