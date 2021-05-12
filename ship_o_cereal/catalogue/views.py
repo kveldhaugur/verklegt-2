@@ -63,6 +63,7 @@ def add_to_history(session, searchstr):
 
 def get_item_by_id(request, id):
     item = get_object_or_404(Items, pk=id)
+
     tags = []
     for tag in item.Tags.all():
         tags.append(tag.CategoryTag)

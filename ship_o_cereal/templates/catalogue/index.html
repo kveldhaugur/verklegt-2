@@ -29,6 +29,11 @@
     <div class="items">
         {% for item in items %}
             {% include 'catalogue/Items.html' with item=item %}
+        {% empty %}
+        <div class="no-search-return">
+            <h1 class="no-return-text">The search returned no items</h1>
+        </div>
         {% endfor %}
+
     </div>
 {% endblock %}
