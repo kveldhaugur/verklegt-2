@@ -67,8 +67,14 @@ def index(request):
                 total_price += int(cart_item.Quantity) * item.Price
                 i += 1 * cart_item.Quantity
             context['items_in_cart'] = items
-            context['total'] = total_price
             context['total_items'] = i
+            if cart.Promo is not None:
+                context['promo_name'] = cart.Promo.Name
+                context['promo_val'] = int(round(cart.Promo.Discount*100))
+                context['total'] = round((total_price * (1 - cart.Promo.Discount)),2)
+            else:
+                context['promo_name'] = None
+                context['total'] = total_price
             return render(request, 'checkout/index.html', context)
     else:
         request.session.create()
