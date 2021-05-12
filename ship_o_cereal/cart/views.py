@@ -16,12 +16,15 @@ def index(request):
             cart_contains = cart.ItemsInCart.all()
             items = []
             total_price = 0
+            i = 0
             for cart_item in cart_contains:
                 item = cart_item.ItemID
                 items.append((item, cart_item.Quantity))
                 total_price += int(cart_item.Quantity) * item.Price
+                i += 1 * cart_item.Quantity
             context['items_in_cart'] = items
             context['total'] = total_price
+            context['total_items'] = i
             return render(request, 'cart/index.html', context)
     else:
         request.session.create()
