@@ -52,9 +52,9 @@ def activate_promo(request):
 def update_item(request):
     data = json.loads(request.body)
 
-    itemID = data['ItemID']
-    action = data['action']
-    quantity = int(data['quantity'])
+    itemID = data['ItemID'] #21312
+    action = data['action'] #add
+    quantity = int(data['quantity']) #1
 
     product = Items.objects.get(ItemID=itemID)
     # check first if item is available
@@ -71,8 +71,8 @@ def update_item(request):
         if 0 < product.Quantity_available < quantity:
             return JsonResponse({'error': 'Failed to update, cannot add more products than are available'}, safe=False)
         cart_contains.Quantity = quantity
-    elif quantity == 1 or action == 'add':
-        if product.Quantity_available > (cart_contains.Quantity + 1):
+    elif quantity == 1 and action == 'add':
+        if product.Quantity_available < (cart_contains.Quantity + 1):
             return JsonResponse({'error': 'Failed to update, cannot add more products than are available'}, safe=False)
         cart_contains.Quantity += 1
     elif action == 'remove':
@@ -90,6 +90,8 @@ def update_item(request):
     else:
         cart_contains.save()
         cart.save()
+    if request.path == '/cart/edit_item':
+        return render(request, )
     return JsonResponse('Item updated', safe=False)
 
 
