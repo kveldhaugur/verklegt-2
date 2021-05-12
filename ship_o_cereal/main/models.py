@@ -97,4 +97,8 @@ class SessionHistory(models.Model):
     SessionID = models.ForeignKey(Session, on_delete=models.CASCADE, null=False)
     HistoryStr = models.CharField(max_length=255)
 
+
+class PromoCodes(models.Model):
+    Name = models.CharField(max_length=63)
+    Discount = models.FloatField()
 # Create your models here.
