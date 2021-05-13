@@ -159,16 +159,17 @@ a {
 
 }
 #add-alert {
-	position: -webkit-sticky;
-	position: sticky;
+
+	position: fixed;
 	left: 1rem;
-	bottom: 1rem;
+	bottom: 3.2rem;
 }
 .alert-warning {
 	margin-bottom: 2rem;
 	color: #216b2b;
     background-color: #b8ebd4;
     border-color: #349358;
-	max-width: 50%;
+	max-width: 60%;
 	align-content: center;
+
 }
