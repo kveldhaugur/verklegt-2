@@ -64,7 +64,7 @@ $(document).ready(function() {
                     return `<div class="card" style="width: 18rem;">
                             <a href="/catalogue/${d.ItemID}">
                                 <img src="/static/images/Items/${d.Image}?v=${d.updated_at}" class="card-img-top" alt="${d.Image}"/>
-                                <div class="item-price">$${d.Price}</div>
+                                <div class="item-price">${d.Price} kr.</div>
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
@@ -141,7 +141,7 @@ $(document).ready(function() {
                     return `<div class="card" style="width: 18rem;">
                             <a href="/catalogue/${d.ItemID}">
                                 <img src="/static/images/Items/${d.Image}?v=${d.updated_at}" class="card-img-top" alt="${d.Image}"/>
-                                <div class="item-price">$${d.Price}</div>
+                                <div class="item-price">${d.Price} kr.</div>
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
@@ -195,7 +195,7 @@ function performAjax (searchText) {
                     return `<div class="card" style="width: 18rem;">
                             <a href="/catalogue/${d.ItemID}">
                                 <img src="/static/images/Items/${d.Image}?v=${d.updated_at}" class="card-img-top" alt="${d.Image}"/>
-                                <div class="item-price">$${d.Price}</div>
+                                <div class="item-price">${d.Price} kr.</div>
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>

@@ -24,7 +24,7 @@
 }
 
 .list-group-item {
-    width: 20rem;
+    width: 25rem;
 
 }
 .p-2 {
@@ -33,7 +33,7 @@
 }
 
 .products-container {
-    width: 70%;
+    width: 60%;
     background-color: #c2c0f9;
 
 }
@@ -63,15 +63,7 @@
     margin-top: 1rem;
 }
 
-.top-of-cart {
-    margin: 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-left: 2rem;
-    margin-right: 10rem;
-    width: 54rem;
-}
+
 
 .chg-quantity {
     width: 12px;
