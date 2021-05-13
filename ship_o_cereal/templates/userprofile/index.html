@@ -3,9 +3,12 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/profilepage.css' %}">
     <div class="top-of-profile">
-
+        {% if user_image == None %}
             <img id='user-profile-pic' src="/static/images/profilepic_darker.png" alt="Here is the profile pic">
-            <button class="profile-btn">Change image</button>
+        {% else %}
+            <img id="user-profile-pic" src="{{ user_image }}">
+        {% endif %}
+
 
 
         <h1>Account Overview</h1>
@@ -13,22 +16,30 @@
     <div class="user-info-container">
         <div class="user-info-box">
             <h3>Profile</h3>
-            <p>Username: </p>
-            <p>Password: </p>
-            <p>Email: </p>
-            <p>Date of birth: </p>
-            <p>Country: </p>
-            <p>City/town: </p>
-            <p>Postal code/ZIP: </p>
-            <p>Address: </p>
-            <p>House number: </p>
+            <p>Username: {{request.user.username}}</p>
+            {% if data == None %}
+                <p>Please edit profile to put in your shipping information</p>
+            {% else %}
+                <p>First Name: {{ data.firstname }} </p>
+                <p>Last Name: {{ data.lastname }}</p>
+                <p>City: {{ data.city }}</p>
+                <p>Postal Code: {{ data.postalcode }}</p>
+                <p>Address: {{ data.address }}</p>
+                <p>House number: {{ data.housenum }}</p>
+                <p>Mobile Phone: {{ data.mobilephone }}</p>
+                <p>Email: {{ data.email }}</p>
+                <p>SSN: {{ data.ssn }}</p>
+                <p>Country: {{ data.country }}</p>
+            {% endif %}
         </div>
         <div class="search-history-btn">
             <button class="profile-btn">Search history</button>
         </div>
     </div>
     <div class="user-info-buttons-below">
-        <button class="profile-btn">Edit profile</button>
+        <form action="{% url 'edit-profile-index' %}">
+            <input type="submit" value="Edit profile" class="profile-btn">
+        </form>
         <button class="profile-btn">My purchases</button>
         <form action="{% url 'logout-index' %}">
             <input type="submit" value="Logout" class="profile-btn">

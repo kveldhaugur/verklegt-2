@@ -82,3 +82,29 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+.item-tag {
+	margin: 0;
+    border: 1px solid transparent;
+    color: white;
+    background-color: #9591f5;
+    padding-bottom: 0.1rem;
+    padding-top: 0.1rem;
+    border-radius: 5px;
+    margin-bottom: 0.3rem;
+	max-width: 10rem;
+	text-align: center;
+	margin-left: 2rem;
+	margin-right: 2rem;
+
+}
+
+.tag-container {
+	align-content: center;
+}
+
+.no-return-text {
+	text-align: center;
+	font-weight: bolder;
+	color: #6862f1;
+}

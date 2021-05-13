@@ -2,67 +2,81 @@
 {% load static %}
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
-    <p>Home > cart</p>
+    <p></p>
+
     <div class="cart-big-container">
         <div class="products-container">
-            <div>
-                <p>Here are products yes</p>
+            {% if items_in_cart != None %}
+            {% for item, quantity in items_in_cart %}
+            <div class="product">
+                <img class="cart-product-img" src="/static/images/Items/{{ item.Image }}" style="max-width: 6rem;" alt="">
+                <div><p>{{ item.Name }}</p></div>
+                <div><p>{{ item.Price }} kr.</p></div>
+                <div>
+                    <div class="quantity">
+                        <img class="chg-quantity update-cart" data-quantity="1" data-item="{{ item.ItemID }}" data-action="add"  src="{% static 'images/arrow-up.png' %}" alt="">
+                        <p class="quantity">{{ quantity }}</p>
+                        <img class="chg-quantity update-cart" data-quantity="1" data-item="{{ item.ItemID }}" data-action="remove" src="{% static 'images/arrow-down.png' %}" alt="">
+                    </div>
+                </div>
             </div>
+            {% endfor %}
+            {% else %}
+            <p>{{ message }}</p>
+            {% endif %}
         </div>
+
 
 
         <div class="checkout-final">
                 <div class="col-md-5 col-lg-4 order-md-last">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
               <span class="text-primary">Your cart</span>
-              <span class="badge bg-primary rounded-pill">3</span>
+              <span class="badge bg-primary rounded-pill">{{total_items}}</span>
             </h4>
             <ul class="list-group mb-3">
-              <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                  <h6 class="my-0">Product name</h6>
-                  <small class="text-muted">Brief description</small>
-                </div>
-                <span class="text-muted">$12</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                  <h6 class="my-0">Second product</h6>
-                  <small class="text-muted">Brief description</small>
-                </div>
-                <span class="text-muted">$8</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                  <h6 class="my-0">Third item</h6>
-                  <small class="text-muted">Brief description</small>
-                </div>
-                <span class="text-muted">$5</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between bg-light">
-                <div class="text-success">
-                  <h6 class="my-0">Promo code</h6>
-                  <small>KONRADISCOOL</small>
-                </div>
-                <span class="text-success">−$5</span>
-              </li>
+               {% for item, quantity in items_in_cart %}
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">{{ item.Name }}</h6>
+
+                    </div>
+                    <span class="text-muted">{% widthratio item.Price 1 quantity %} kr.</span>
+                </li>
+            {% endfor %}
+
+            <div id="promo-container">
+                {% if promo_name is not None %}
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                    <div class="text-success">
+                        <h6 class="my-0">Promo code</h6>
+                        <small>{{promo_name}}</small>
+                    </div>
+                    <span class="text-success">{{ promo_val }}%</span>
+                </li>
+                {% endif %}
+            </div>
+
+
+
+
+
               <li class="list-group-item d-flex justify-content-between">
-                <span>Total (USD)</span>
-                <strong>$20</strong>
+                <span>Total (ISK)</span>
+                <strong id="total-price">{{total}} </strong>
               </li>
             </ul>
-
-            <form class="card p-2">
+            <div class="card p-2" >
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Promo code">
-                <button type="submit" class="btn btn-secondary">Redeem</button>
+                <input type="text" class="form-control" placeholder="Promo code" id="promo-box">
+                <button type="submit" class="btn btn-secondary" id="promo-btn" onclick="promoCodeValidation()">Redeem</button>
               </div>
-            </form>
+            </div>
           </div>
+            <a href="/checkout/" class="btn btn-primary">Proceed to checkout</a>
         </div>
-
     </div>
     <div>
-    <p>Back to shop</p>
+    <button class="btn-primary">Back to shop</button>
     </div>
 {% endblock %}

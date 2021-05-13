@@ -1,6 +1,6 @@
-var recentSearch = '';
+var filteredArr = [];
 
-$(function() {
+/*$(function() {
   $('#search-box').keypress(function(e) {
     var key = e.which;
     if (key == 13) // the enter key code
@@ -9,48 +9,12 @@ $(function() {
       return false;
     }
   });
-});
+});*/
 
-var sendToCatalogue = function() {
-    if (window.location.pathname !== '/catalogue/') {
-        window.location.replace('/catalogue/');
-    };
+function searchFromHistory(object) {
+    $('#search-box').val(object);
+    document.searchForm.submit();
 }
-
-$(document).ready(function() {
-    $('#search-btn').on('click', function(e) {
-        e.preventDefault();
-        var searchText = $('#search-box').val();
-        recentSearch = searchText;
-        $.ajax( {
-            url: '/catalogue/?search_filter=' + searchText,
-            type: 'GET',
-            success: function(resp) {
-                var newHtml = resp.data.map(d => {
-                    return `<div class="card" style="width: 18rem;">
-                            <a href="/catalogue/${d.ItemID}">
-                                <img src="/static/images/Items/${d.Image}?v=${d.updated_at}" class="card-img-top" alt="${d.Image}"/>
-                                <div class="item-price">$${d.Price}</div>
-                                <div class="card-body">
-                                    <h5 class="card-title">${d.Name}</h5>
-                                    <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                                </div>
-                            </a>
-                        </div>`
-                });
-
-                $('.items').html(newHtml.join(''));
-                $('#search-box').val('');
-            },
-            error: function(xhr, status, error) {
-                // TODO Show toaster
-                console.error(error);
-            }
-        })
-    });
-});
-
 
 function sortByProperty(property){
    return function(a,b){
@@ -79,7 +43,7 @@ $(document).ready(function() {
         e.preventDefault();
         var selectedOption = $(this).children("option:selected").val();
         $.ajax( {
-            url: '/catalogue/?search_filter=' + recentSearch,
+            url: 'get_tags/?search_filter=' + recentSearch,
             type: 'GET',
             success: function(resp) {
                 if (selectedOption === 'lth') {
@@ -104,7 +68,8 @@ $(document).ready(function() {
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                                    <button data-quantity="1" data-item={{item.ItemID}} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
+                               
                                 </div>
                             </a>
                         </div>`
@@ -121,7 +86,7 @@ $(document).ready(function() {
 });
 
 
-$(document).ready(function() {
+/*$(document).ready(function() {
     $('#search-btn').on('click', function(e) {
         e.preventDefault();
 
@@ -137,7 +102,7 @@ $(document).ready(function() {
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                                    <button data-quantity="1" data-item={{item.ItemID}} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
                                 </div>
                             </a>
                         </div>`
@@ -151,4 +116,97 @@ $(document).ready(function() {
             }
         })
     });
+});*/
+
+
+$(document).ready(function() {
+    $('#filter-by').trigger('change');
+    $('#filter-by').change(function(e) {
+        e.preventDefault();
+        var selectedOption = Number($(this).children("option:selected").val());
+        $.ajax( {
+            url: 'get_tags/?search_filter=' + recentSearch,
+            type: 'GET',
+            success: function(resp) {
+                var newArr = resp.data
+                var filteredArr = []
+                for (i = 0; i < newArr.length; i++) {
+                    if (newArr[i].Tags.includes(selectedOption)) {
+                        filteredArr.push(newArr[i]);
+                    }
+                };
+
+                var newHtml = filteredArr.map(d => {
+                    return `<div class="card" style="width: 18rem;">
+                            <a href="/catalogue/${d.ItemID}">
+                                <img src="/static/images/Items/${d.Image}?v=${d.updated_at}" class="card-img-top" alt="${d.Image}"/>
+                                <div class="item-price">$${d.Price}</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">${d.Name}</h5>
+                                    <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
+                                    <button data-quantity="1" data-item={{item.ItemID}} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
+                                    
+                                </div>
+                            </a>
+                        </div>`
+                });
+                $('.items').html(newHtml.join(''));
+
+            },
+            error: function(xhr, status, error) {
+                // TODO Show toaster
+                console.error(error);
+            }
+        })
+    });
 });
+
+function ShowHistory() {
+    var x = document.getElementById("history_container");
+    x.classList.toggle("show")
+}
+
+/*$(document).ready(function() {
+    $('.search-btn').on('click', function(e) {
+        e.preventDefault();
+
+        var searchText = $('#search-box').val();
+        recentSearch = searchText;
+        //moveToCatalogue();
+        performAjax(searchText);
+    });
+});*/
+
+function performAjax (searchText) {
+    $.ajax( {
+            url: '/catalogue/?search_filter=' + searchText,
+            type: 'GET',
+            /*beforeSend: function() {
+               if (window.location.pathname !== '/catalogue/') {
+                    window.location.replace('/catalogue/');
+                };
+            },*/
+            success: function(resp) {
+                var newHtml = resp.data.map(d => {
+                    return `<div class="card" style="width: 18rem;">
+                            <a href="/catalogue/${d.ItemID}">
+                                <img src="/static/images/Items/${d.Image}?v=${d.updated_at}" class="card-img-top" alt="${d.Image}"/>
+                                <div class="item-price">$${d.Price}</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">${d.Name}</h5>
+                                    <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
+                                    <button data-quantity="1" data-item={{item.ItemID}} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
+                                </div>
+                            </a>
+                        </div>`
+                });
+
+                $('.items').html(newHtml.join(''));
+                $('#search-box').val('');
+            },
+            error: function(xhr, status, error) {
+                // TODO Show toaster
+                console.error(error);
+            }
+        });
+};

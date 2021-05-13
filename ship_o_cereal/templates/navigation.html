@@ -19,8 +19,25 @@
         </li>
       </ul>
         <div class="search-container">
-          <input class="form-control me-2" type="search" id="search-box" placeholder="Type to search" aria-label="Search">
-          <button class="btn btn-outline-success" id="search-btn" type="submit">Search</button>
+
+          <form method=POST action="{% url 'catalogue-index' %}" name="searchForm">
+            {% csrf_token %}
+            <input class="form-control me-2" type="search" id="search-box" placeholder="Type to search" aria-label="Search" name="search_filter">
+            <button class="btn btn-outline-success" id="search-btn" type="submit" >Search</button>
+          </form>
+          <div class="btn-group">
+                <button type="button" id="history-btn" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="/static/images/history.svg" style="width: 2rem">
+
+                </button>
+                <ul class="dropdown-menu">
+                  {% if history != None %}
+                  {% for item in history %}
+                  <li><a class="dropdown-item" id="{{ item }}-historystr" name="{{ item }}" href="javascript: searchFromHistory('{{item}}')">{{ item }}</a></li>
+                  {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
         </div>
 
     {% if user.is_authenticated %}

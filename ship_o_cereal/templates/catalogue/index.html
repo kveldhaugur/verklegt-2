@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    <script>
+        var recentSearch = "{{ recentSearch }}"
+    </script>
     <link rel="stylesheet" href="{% static 'css/catalogue.css' %}">
     <p>Home < Catalogue</p>
     <div class="catalogue-top">
@@ -14,12 +17,11 @@
             </select>
         </div>
         <div class="filter-container">
-            <label id="filter-label" for="filter-by">Filter by:</label>
+            <label id="filter-label" for="filter-by">Search tag:</label>
             <select name="filter-by" id="filter-by" style="height: auto;">
                 {% for tag in tags %}
                 <option id="{{tag.CategoryTag}}-filter" value="{{tag.CategoryID}}">{{tag.CategoryTag}}</option>
                 {% endfor %}
-
             </select>
         </div>
     </div>
@@ -27,6 +29,11 @@
     <div class="items">
         {% for item in items %}
             {% include 'catalogue/Items.html' with item=item %}
+        {% empty %}
+        <div class="no-search-return">
+            <h1 class="no-return-text">The search returned no items</h1>
+        </div>
         {% endfor %}
+
     </div>
 {% endblock %}
