@@ -95,8 +95,8 @@ class Order(models.Model): #has id
     ItemsInOrder = models.ManyToManyField(OrderContains)
     TotalPrice = models.FloatField(null=False, default=0)
     DatePurchased = models.DateField(auto_now_add=True, blank=True)
-    AccountConnected = models.ForeignKey(User, on_delete=models.PROTECT, null=True, default=None)
-    SessionConnected = models.ForeignKey(Session, on_delete=models.PROTECT, null=True, default=None)
+    AccountConnected = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=None)
+    SessionConnected = models.ForeignKey(Session, on_delete=models.SET_NULL, null=True, default=None)
 
 
 class UserImage(models.Model):
