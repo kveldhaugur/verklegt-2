@@ -68,8 +68,7 @@ $(document).ready(function() {
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <button data-quantity="1" data-item="${d.ItemID}" data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
-                               
+                                    <button data-quantity="1" data-item=${d.ItemID} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
                                 </div>
                             </a>
                         </div>`
@@ -102,7 +101,7 @@ $(document).ready(function() {
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <button data-quantity="1" data-item="${d.ItemID}" data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
+                                    <button data-quantity="1" data-item=${d.ItemID} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
                                 </div>
                             </a>
                         </div>`
@@ -144,7 +143,7 @@ $(document).ready(function() {
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <button data-quantity="1" data-item="${d.ItemID}" data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
+                                    <button data-quantity="1" data-item=${d.ItemID} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
                                     
                                 </div>
                             </a>
@@ -195,7 +194,7 @@ function performAjax (searchText) {
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <button data-quantity="1" data-item="${d.ItemID}" data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
+                                    <button data-quantity="1" data-item=${d.ItemID} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
                                 </div>
                             </a>
                         </div>`
