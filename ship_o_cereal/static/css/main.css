@@ -57,11 +57,12 @@ body {
 
 footer {
 	width: 100%;
-	position: fixed;
+	left: 0;
 	bottom: 0;
 	background-color: #6862f1;
 	text-align: center;
 	color: white;
+
 
 
 }
