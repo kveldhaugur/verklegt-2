@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from main.models import UserInfo, Country, UserImage, ShoppingCart, PromoCodes, Order, OrderContains, Items
@@ -14,8 +14,11 @@ def index(request):
         result, message = validate_payment(request.POST)
         if result:
             #throw it all into an order
-            create_order(request)
-            return render(request, 'confirmation.html thingy')#confirmation page goes here
+            order_id = create_order(request)
+            return render(request, f'receipt/index.html', {
+                'item': f"{order_id}",
+
+            })#confirmation page goes here
 
     else:
         context = {
@@ -153,6 +156,7 @@ def validate_creditcard(cardnum):
 def create_order(request):
     cart = ShoppingCart.objects.get(SessionID=request.session.session_key)
     itemsincart = cart.ItemsInCart.all()
+    user = None
     order_items = []
     total_price = 0
     for item in itemsincart:
@@ -177,12 +181,16 @@ def create_order(request):
     order.save()
     for item in order_items:
         order.ItemsInOrder.add(item)
+    if user is not None:
+        order.AccountConnected = user
+    order.SessionConnected = Session.objects.get(session_key=request.session.session_key)
     order.save()
     #delete from cart
     for item in itemsincart:
         cart.ItemsInCart.remove(item)
         item.delete()
     cart.delete()
+    return order.id
 
 
 
@@ -203,3 +211,29 @@ def create_shipping_info(post, user=None):
     )
     shippinginfo.save()
     return shippinginfo
+
+
+def receipt(request, id):
+    # first of all check if order exists
+    context = {}
+    # find the owner of the receipt
+    try:
+        session = Session.objects.get(session_key=request.session.session_key)
+        user = User.objects.get(id=request.user.id)
+        order = Order.objects.get(id=id, AccountConnected=user)
+    except Session.DoesNotExist:
+        # gtfo, no business here
+        return render(request, 'homepage/index.html')
+    except User.DoesNotExist:
+        # try to get from session instead
+        try:
+            order = Order.objects.get(id=id, SessionConnected=session)
+        except Order.DoesNotExist:
+            # request doesnt have the right session or the account, so go to homepage jail
+            return render(request, 'homepage/index.html')
+    except Order.DoesNotExist:
+        return render(request, 'homepage/index.html')
+    context['order'] = order
+    context['days_left'] = (datetime.datetime.now() + datetime.timedelta(days=7) - datetime.datetime.now()).days
+    return render(request, 'checkout/receipt.html', context)
+    # order.doesnotexist shouldnt happen because get_object_or_404 will take care of that
