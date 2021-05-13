@@ -100,14 +100,14 @@ def validate_payment(post):
 
 def validate_user(user_info):
     # TODO: phone & ssn & city are yet to be validated
-    if user_info['FirstName'].isalpha() == False:
+    if user_info['FirstName'].replace(' ', '').isalpha() == False:
         return False, 'firstname contains bad chars'
-    if user_info['LastName'].isalpha() == False:
+    if user_info['LastName'].replace(' ', '').isalpha() == False:
         return False, 'lastname contains bad chars'
     email_regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
     if (re.search(email_regex, user_info['Email'])) == False:
         return False, 'email was not valid'
-    if user_info['Address'].isalpha() == False:
+    if user_info['Address'].replace(' ', '').isalpha() == False:
         return False, 'address contains bad chars'
     if user_info['HouseNum'].isdigit() == False:
         return False, 'housenum is not a number'
@@ -118,7 +118,7 @@ def validate_user(user_info):
 
 
 def validate_cc(credit_info):
-    if credit_info['CCName'].isalpha() == False:
+    if credit_info['CCName'].replace(' ', '').isalpha() == False:
         return False, 'CCName contains bad chars'
     if validate_creditcard(credit_info['CCNum']) == False:
         return False, 'bad creditcard number'

@@ -3,6 +3,7 @@
 {% block content %}
     <script>
         var recentSearch = "{{ recentSearch }}"
+        var recentTag = "{{ recentTag }}"
     </script>
     <link rel="stylesheet" href="{% static 'css/catalogue.css' %}">
     <p>Home < Catalogue</p>
@@ -18,12 +19,19 @@
             </select>
         </div>
         <div class="filter-container">
+            <form method="POST" action="{% url 'catalogue-index' %}">{% csrf_token %}
             <label id="filter-label" for="filter-by">Search tag:</label>
-            <select name="filter-by" id="filter-by" style="height: auto;">
+
+                <select name="filter-by" id="filter-by" style="height: auto;" data-recent_search="{{ recentSearch }}" data-recent_tag="{{ recentTag }}">
                 {% for tag in tags %}
                 <option id="{{tag.CategoryTag}}-filter" value="{{tag.CategoryID}}">{{tag.CategoryTag}}</option>
                 {% endfor %}
-            </select>
+                </select>
+                <input name="recentSearch" value="{{ recentSearch }}" style="visibility: hidden"></input>
+                <input name="recentTag" value="{{ recentTag }}" style="visibility: hidden"></input>
+                <button type="submit" id="filter_by_hidden" style="visibility: hidden"></button>
+            </form>
+
         </div>
     </div>
 

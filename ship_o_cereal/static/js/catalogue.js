@@ -43,8 +43,14 @@ $(document).ready(function() {
         e.preventDefault();
         var selectedOption = $(this).children("option:selected").val();
         $.ajax( {
-            url: 'get_tags/?search_filter=' + recentSearch,
+            url: 'get_tags/',
             type: 'GET',
+            contenttype: 'application/json; charset=utf-8',
+            data: {
+                recentSearch: recentSearch,
+                recentTag: recentTag,
+            },
+            dataType: 'json',
             success: function(resp) {
                 if (selectedOption === 'lth') {
                     order = 'Price';
@@ -125,6 +131,9 @@ $(document).ready(function() {
     $('#filter-by').trigger('change');
     $('#filter-by').change(function(e) {
         e.preventDefault();
+        var filterbutton = document.getElementById('filter_by_hidden');
+        filterbutton.click();
+        /*
         var selectedOption = Number($(this).children("option:selected").val());
         $.ajax( {
             url: 'get_tags/?search_filter=' + recentSearch,
@@ -162,7 +171,7 @@ $(document).ready(function() {
         })
         .then((response) =>{
             addCartListeners();
-        })
+        })*/
     });
 });
 

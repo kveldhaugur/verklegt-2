@@ -90,7 +90,7 @@ class OrderContains(models.Model):
 
 
 class Order(models.Model): #has id
-    ShippingInfoID = models.ForeignKey(UserInfo, on_delete=models.PROTECT, null=False)
+    ShippingInfoID = models.ForeignKey(UserInfo, on_delete=models.CASCADE, null=False)
     ItemsInOrder = models.ManyToManyField(OrderContains)
     TotalPrice = models.FloatField(null=False, default=0)
     DatePurchased = models.DateField(auto_now_add=True, blank=True)

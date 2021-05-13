@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from catalogue.forms.item_form import ItemCreateForm
 from main.models import Items, ItemCategory, SessionHistory
 from django.contrib.sessions.models import Session
-
+import json
 
 
 # Create your views here.
@@ -13,27 +13,48 @@ def index(request):
     if 'search_filter' in request.POST:
         search_filter = request.POST['search_filter']
         add_to_history(request.session, search_filter)
-
+        recentTag = ''
         context = {
             'items': Items.objects.filter(Name__icontains=search_filter),
             'tags': ItemCategory.objects.all().order_by('CategoryID'),
-            'recentSearch': search_filter
+            'recentSearch': search_filter,
+            'recentTag': recentTag
         }
-
+        return render(request, 'catalogue/index.html', context)
     else:
         context = {
             'items': Items.objects.all().order_by('Name'),
             'tags': ItemCategory.objects.all().order_by('CategoryID'),
-            'recentSearch': ''
+            'recentSearch': '',
+            'recentTag': ''
+        }
+    if 'filter-by' in request.POST:
+        filter_filter = request.POST['filter-by']
+        if 'recentSearch' in request.POST and request.POST['recentSearch'] is not '':
+            items = Items.objects.filter(Name__icontains=request.POST['recentSearch'])
+        else:
+            items = Items.objects.all()
+        tag_filter = ItemCategory.objects.get(CategoryID=int(filter_filter))
+        context = {
+            'items': items.filter(Tags=tag_filter),
+            'tags': ItemCategory.objects.all(),
+            'recentSearch': request.POST['recentSearch'],
+            'recentTag': tag_filter.CategoryTag
         }
     return render(request, 'catalogue/index.html', context)
 
 def get_tags(request):
-    items = []
-    search_filter = ""
-    if 'search_filter' in request.GET:
-        search_filter = request.GET['search_filter']
-    for x in Items.objects.filter(Name__icontains=search_filter):
+    items_lis = []
+    # search_filter = ""
+    # if 'search_filter' in request.GET:
+    #     search_filter = request.GET['search_filter'] ## remove #'s if somethings fucky
+    items = Items.objects.all()
+    if request.GET['recentSearch'] is not '':
+        items = items.filter(Name__icontains=request.GET['recentSearch'])
+    if request.GET['recentTag'] is not '':
+        tag = ItemCategory.objects.get(CategoryTag=request.GET['recentTag'])
+        items = items.filter(Tags=tag)
+    for x in items:
         tags = []
         for tag in x.Tags.all():
             tags.append(tag.CategoryID)
@@ -45,8 +66,8 @@ def get_tags(request):
             'Price': x.Price,
             'Tags': tags
         }
-        items.append(ble)
-    return JsonResponse({'data': items})
+        items_lis.append(ble)
+    return JsonResponse({'data': items_lis})
 
 def add_to_history(session, searchstr):
     if session.session_key == None:
