@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="signin-text">My Purchases</h1>
+<div class="container my-5">
+
+    <div class="d-md-flex d-none justify-content-md-between justify-content-sm-center align-content-center border-bottom border-2 my-2 bg-dark text-light p-3 rounded-3">
+        <div class="col-3 text-sm-center text-md-start align-self-center">
+            <h1 class="h5 fw-bold">Order ID</h1>
+        </div>
+        <div class="col-3 align-self-center">
+            <h1 class="h5 fw-bold">Date of purchase</h1>
+        </div>
+        <div class="col-3 align-self-center">
+            <h1 class="h5 fw-bold">Total amount</h1>
+        </div>
+        <div class="col-3 align-self-center">
+            <h1 class="h5 fw-bold">Show details</h1>
+        </div>
+    </div>
+    <div class="d-md-flex d-sm-block justify-content-md-between justify-content-sm-center text-center border-bottom border-2 my-2 bg-light p-2 rounded-3">
+        <div class="col-md-3 text-sm-center text-md-start align-self-center my-2">
+            <h1 class="h6">2F456DA</h1>
+        </div>
+        <div class="col-md-3 text-sm-center text-md-start align-self-center my-2">
+            <h1 class="h6">04/12/2021 3:15:24:299</h1>
+        </div>
+        <div class="col-md-3 text-sm-center text-md-start align-self-center my-2">
+            <h1 class="h6">200$</h1>
+        </div>
+        <div class="col-md-3 text-sm-center text-md-start align-self-center my-2"> <a class="btn btn-outline-dark w-100" href="#">Details</a> </div>
+
+    </div>
+
+</div>
+{% endblock %}
