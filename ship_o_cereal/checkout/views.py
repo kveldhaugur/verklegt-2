@@ -15,44 +15,40 @@ def index(request):
         if result:
             #throw it all into an order
             order_id = create_order(request)
-            return render(request, f'receipt/index.html', {
-                'item': f"{order_id}",
+            return receipt(request, order_id)#confirmation page goes here
 
-            })#confirmation page goes here
-
-    else:
-        context = {
-            'data': None
+    context = {
+        'data': None
+    }
+    try:
+        usrdata = UserInfo.objects.get(AccountConnected=request.user.id)
+        info = {
+            'firstname': usrdata.FirstName,
+            'lastname': usrdata.LastName,
+            'city': usrdata.City,
+            'postalcode': usrdata.PostalCode,
+            'address': usrdata.Address,
+            'housenum': usrdata.HouseNum,
+            'mobilephone': usrdata.MobilePhone,
+            'email': usrdata.Email,
+            'ssn': usrdata.SSN,
+            'country': usrdata.Country
         }
-        try:
-            usrdata = UserInfo.objects.get(AccountConnected=request.user.id)
-            info = {
-                'firstname': usrdata.FirstName,
-                'lastname': usrdata.LastName,
-                'city': usrdata.City,
-                'postalcode': usrdata.PostalCode,
-                'address': usrdata.Address,
-                'housenum': usrdata.HouseNum,
-                'mobilephone': usrdata.MobilePhone,
-                'email': usrdata.Email,
-                'ssn': usrdata.SSN,
-                'country': usrdata.Country
-            }
-        except UserInfo.DoesNotExist:
-            info = {
-                'firstname': '',
-                'lastname': '',
-                'city': '',
-                'postalcode': '',
-                'address': '',
-                'housenum': '',
-                'mobilephone': '',
-                'email': '',
-                'ssn': '',
-                'country': ''
-            }
-        context['data'] = info
-        context['countries'] = Country.objects.all()
+    except UserInfo.DoesNotExist:
+        info = {
+            'firstname': '',
+            'lastname': '',
+            'city': '',
+            'postalcode': '',
+            'address': '',
+            'housenum': '',
+            'mobilephone': '',
+            'email': '',
+            'ssn': '',
+            'country': ''
+        }
+    context['data'] = info
+    context['countries'] = Country.objects.all()
 
     if request.session.session_key is not None:
         try:
@@ -244,7 +240,7 @@ def receipt(request, id):
     items = []
     total_items = 0
     for item in itemsinorder:
-        items.append((item.Quantity, item.Price, item.ItemID_id))
+        items.append((item.Quantity, item.Price, Items.objects.get(ItemID=item.ItemID_id)))
         total_items += item.Quantity
     context['items'] = items
     context['total_items'] = total_items

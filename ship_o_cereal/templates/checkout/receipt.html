@@ -43,25 +43,26 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
         {% for quantity, price, item in items %}
+    <tr>
       <td>{{ forloop.counter }}</td>
       <td>{{ quantity }}x</td>
       <td>{{ item.Name }}</td>
       <td>{{ price }} kr.</td>
       <td>{% widthratio price 1 quantity %} kr.</td>
-        {% endfor %}
-        <br>
-        <td>Total</td>
-        <td>{{ total_items }}</td>
-        <td></td>
-        <td></td>
-        <td>{{ order.TotalPrice }}</td>
     </tr>
+        {% endfor %}
+  </tbody>
+  <br>
+  <tbody style="border-top: 1px black solid">
+     <td>Total</td>
+     <td>{{ total_items }}</td>
+     <td></td>
+     <td></td>
+     <td>{{ order.TotalPrice }} kr.</td>
   </tbody>
 </table>
 
-
-{{ shipping.FirstName }}
+<br>
 
 {% endblock %}

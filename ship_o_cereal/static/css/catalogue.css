@@ -34,7 +34,7 @@
     background-color: white;
     margin: 1.5rem;
     padding: 1.5rem;
-    width: 45%;
+    width: 70%;
 }
 
 .item-img {
@@ -107,4 +107,12 @@
 	text-align: center;
 	font-weight: bolder;
 	color: #6862f1;
+}
+
+.orders_wrongcolor {
+	color: #6862f1;
+}
+
+.orders_wrongcolor a {
+	color: black;
 }

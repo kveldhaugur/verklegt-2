@@ -73,6 +73,7 @@ def get_item_by_id(request, id):
         'Description': item.Description,
         'Image': item.Image,
         'Price': item.Price,
+        'Image_extra': item.Image_extra,
         'Tags': tags
     }
     return render(request, 'catalogue/item-details.html', {
