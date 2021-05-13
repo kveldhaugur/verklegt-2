@@ -114,3 +114,12 @@
 .product-name-price {
 	display: inline-block;
 }
+
+.items {
+	text-align: center;
+}
+
+.item-price2.item-price{
+	right:11rem !important;
+	text-decoration: line-through;
+}

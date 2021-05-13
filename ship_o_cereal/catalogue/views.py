@@ -10,6 +10,12 @@ import json
 # Create your views here.
 def index(request):
     print(request.POST)
+    recentSearch = ''
+    recentTag = ''
+    if 'recentSearch' in request.POST:
+        recentSearch = request.POST['recentSearch']
+    if 'recentTag' in request.POST:
+        recentTag = request.POST['recentTag']
     if 'search_filter' in request.POST:
         search_filter = request.POST['search_filter']
         add_to_history(request.session, search_filter)
@@ -25,20 +31,26 @@ def index(request):
         context = {
             'items': Items.objects.all().order_by('Name'),
             'tags': ItemCategory.objects.all().order_by('CategoryID'),
-            'recentSearch': '',
-            'recentTag': ''
+            'recentSearch': recentSearch,
+            'recentTag': recentTag
         }
-    if 'filter-by' in request.POST:
-        filter_filter = request.POST['filter-by']
+    if 'filter-by' in request.POST or 'filter-by' in request.GET:
+        tag_filter = None
+        if 'filter-by' in request.GET:
+            filter_filter = request.GET['filter-by']
+            tag_filter = ItemCategory.objects.get(CategoryTag=filter_filter)
+        else:
+            filter_filter = request.POST['filter-by']
         if 'recentSearch' in request.POST and request.POST['recentSearch'] != '':
             items = Items.objects.filter(Name__icontains=request.POST['recentSearch'])
         else:
             items = Items.objects.all()
-        tag_filter = ItemCategory.objects.get(CategoryID=int(filter_filter))
+        if tag_filter is None:
+            tag_filter = ItemCategory.objects.get(CategoryID=int(filter_filter))
         context = {
             'items': items.filter(Tags=tag_filter),
             'tags': ItemCategory.objects.all(),
-            'recentSearch': request.POST['recentSearch'],
+            'recentSearch': recentSearch,
             'recentTag': tag_filter.CategoryTag
         }
     return render(request, 'catalogue/index.html', context)

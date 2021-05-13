@@ -1,12 +1,23 @@
 
 {% extends 'base.html' %}
 {% block content %}
+{% url 'catalogue-index' as the_url %}
     <div class="text-before-product">
         <span>Daily Deals</span>
     </div>
     <div class="items">
-            {% for Item in daily_deals %}
-                {% include 'catalogue/Items.html' with item=Item %}
+            {% for item in daily_deals %}
+                <div class="card" style="width: 18rem;">
+                    <a href="/catalogue/{{ item.ItemID }}">
+                    <img src="/static/images/Items/{{ item.Image }}?v={{ item.updated_at }}" class="card-img-top" alt="{{ item.Image }}">
+                    <div class="item-price">{{ item.Price }} kr.</div>
+                    <div class="item-price2 item-price">{{ item.Price|add:"500" }} kr.</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.Name }}</h5>
+                        <a href="/catalogue/{{ item.ItemID }}" class="btn btn-primary">See Details</a>
+                        <button data-quantity="1" data-item={{item.ItemID}} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
+                    </div></a>
+                </div>
 
             {% endfor %}
         </div>
@@ -30,7 +41,7 @@
     </div>
     <div class="categories-homepage">
         <div class="card" style="width: 20rem;">
-            <a href="#">
+            <a href="{{ the_url }}?filter-by=Cereal">
                 {% for image in cereal_category %}
                     <img src="/static/images/Items/{{ image }}" class="categories-img" alt="some photo here">
                 {% endfor %}
@@ -40,7 +51,7 @@
             </a>
         </div>
         <div class="card" style="width: 20rem;">
-            <a href="#">
+            <a href="{{ the_url }}?filter-by=Merch">
                 {% for image in merch_category %}
                     <img src="/static/images/Items/{{ image }}" class="categories-img" alt="some photo here">
                 {% endfor %}
@@ -50,12 +61,11 @@
             </a>
         </div>
         <div class="card" style="width: 20rem;">
-            <a href="#">
+            <a href="{{ the_url }}?filter-by=Book">
                 <div class="img-cat-container">
-                    <img src="/static/images/Items/Buc_Wheats.jpg" class="categories-img" alt="some photo here">
-                    <img src="/static/images/Items/Capn_crunch.jpg" class="categories-img" alt="some photo here">
-                    <img src="/static/images/Items/Rice_krispies.jpg" class="categories-img" alt="some photo here">
-                    <img src="/static/images/Items/Honey_nut.jpg" class="categories-img" alt="some photo here">
+                    {% for book in book_category %}
+                    <img src="/static/images/Items/{{ book }}" class="categories-img" alt="some photo here">
+                    {% endfor %}
                 </div>
 
                 <div class="card-body">
