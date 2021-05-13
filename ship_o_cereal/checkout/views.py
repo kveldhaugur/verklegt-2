@@ -131,7 +131,7 @@ def validate_cc(credit_info):
             year, month = str(datetime.datetime.today()).split(' ')[0].split('-')[0:2]
             year = int(year)
             month = int(month)
-            if cardyear > year:
+            if cardyear >= year:
                 return True, 'card validated'
             elif cardyear == year:
                 if cardmonth >= month:

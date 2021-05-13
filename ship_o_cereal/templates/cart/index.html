@@ -30,7 +30,7 @@
 
         <div class="checkout-final">
                 <div class="col-md-5 col-lg-4 order-md-last">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="d-flex justify-content-between align-items-center mb-3 ">
               <span class="text-primary">Your cart</span>
               <span class="badge bg-primary rounded-pill">{{total_items}}</span>
             </h4>
@@ -57,13 +57,9 @@
                 {% endif %}
             </div>
 
-
-
-
-
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total (ISK)</span>
-                <strong id="total-price">{{total}} </strong>
+                <strong name="total" value="{{ total }}">{{total}} kr.</strong>
               </li>
             </ul>
             <div class="card p-2" >

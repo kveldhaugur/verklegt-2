@@ -70,12 +70,11 @@ $(document).ready(function() {
                     return `<div class="card" style="width: 18rem;">
                             <a href="/catalogue/${d.ItemID}">
                                 <img src="/static/images/Items/${d.Image}?v=${d.updated_at}" class="card-img-top" alt="${d.Image}"/>
-                                <div class="item-price">$${d.Price}</div>
+                                <div class="item-price">${d.Price} kr.</div>
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <button data-quantity="1" data-item="${d.ItemID}" data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
-                               
+                                    <button data-quantity="1" data-item=${d.ItemID} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
                                 </div>
                             </a>
                         </div>`
@@ -110,7 +109,7 @@ $(document).ready(function() {
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <button data-quantity="1" data-item="${d.ItemID}" data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
+                                    <button data-quantity="1" data-item=${d.ItemID} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
                                 </div>
                             </a>
                         </div>`
@@ -151,11 +150,11 @@ $(document).ready(function() {
                     return `<div class="card" style="width: 18rem;">
                             <a href="/catalogue/${d.ItemID}">
                                 <img src="/static/images/Items/${d.Image}?v=${d.updated_at}" class="card-img-top" alt="${d.Image}"/>
-                                <div class="item-price">$${d.Price}</div>
+                                <div class="item-price">${d.Price} kr.</div>
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <button data-quantity="1" data-item="${d.ItemID}" data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
+                                    <button data-quantity="1" data-item=${d.ItemID} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
                                     
                                 </div>
                             </a>
@@ -205,11 +204,11 @@ function performAjax (searchText) {
                     return `<div class="card" style="width: 18rem;">
                             <a href="/catalogue/${d.ItemID}">
                                 <img src="/static/images/Items/${d.Image}?v=${d.updated_at}" class="card-img-top" alt="${d.Image}"/>
-                                <div class="item-price">$${d.Price}</div>
+                                <div class="item-price">${d.Price} kr.</div>
                                 <div class="card-body">
                                     <h5 class="card-title">${d.Name}</h5>
                                     <a href="/catalogue/${d.ItemID}" class="btn btn-primary">See Details</a>
-                                    <button data-quantity="1" data-item="${d.ItemID}" data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
+                                    <button data-quantity="1" data-item=${d.ItemID} data-action="add" class="btn btn-primary add-btn update-cart">Add to Cart</button>
                                 </div>
                             </a>
                         </div>`
