@@ -67,6 +67,7 @@ class ShippingInfo(models.Model):
     SSN = models.CharField(max_length=255)
     Country = models.ForeignKey(Country, on_delete=models.CASCADE)
 
+
 class PromoCodes(models.Model): # id
     Name = models.CharField(max_length=63)
     Discount = models.FloatField()

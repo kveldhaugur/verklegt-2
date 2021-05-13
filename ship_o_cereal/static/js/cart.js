@@ -24,8 +24,6 @@ addCartListeners();
 
 function promoCodeValidation() {
     insertedPromo = document.getElementById('promo-box').value
-    totalPrice = document.getElementById('total-price').innerHTML
-
     var url = '/cart/promo/'
 
     fetch(url, {
@@ -35,8 +33,7 @@ function promoCodeValidation() {
             'X-CSRFToken': csrftoken,
         },
         body:JSON.stringify({
-            'promo_name': insertedPromo,
-            'total_price': totalPrice
+            'promo_name': insertedPromo
         })
     })
         .then((response) =>{

@@ -42,16 +42,11 @@ def activate_promo(request):
     data = json.loads(request.body)
     print(request.body)
     promo_name = data['promo_name']
-    price = data['total_price']
     try:
         promo = PromoCodes.objects.get(Name=promo_name)
         cart = get_or_create_cart(request.session)
         cart.Promo = promo
         cart.save()
-        if not price.isdigit():
-            total_after_promo = 0
-        else:
-            total_after_promo = round(int(price) - int(price) * promo.Discount, 2)
 
     except PromoCodes.DoesNotExist:
         return JsonResponse({
@@ -61,7 +56,6 @@ def activate_promo(request):
     return JsonResponse(
         {
             'message': 'Promo accepted',
-            'data': total_after_promo,
             'discount': promo.Discount
         }, safe=False)
 
@@ -125,9 +119,12 @@ def get_or_create_cart_contains(product, cart, customer):
     # get the instance that's being changed from shoppingcart.itemsincart with the itemid, or create a new one
     try:
         items_in_cart = cart.ItemsInCart.all()
+        print(f"{items_in_cart} : try1")
         # cart_contains = items_in_cart.filter(ItemID=product.ItemID)
         cart_contains = items_in_cart.filter(ItemID=product.ItemID)[0]
     except (CartContains.DoesNotExist, IndexError) as e:
+        items_in_cart = cart.ItemsInCart.all()
+        print(f"{items_in_cart} : try2")
         cart_contains = CartContains(ItemID=product, Quantity=0)
         cart_contains.save()
         cart.ItemsInCart.add(cart_contains)
