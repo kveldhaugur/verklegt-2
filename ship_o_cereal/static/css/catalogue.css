@@ -108,3 +108,11 @@
 	font-weight: bolder;
 	color: #6862f1;
 }
+
+.orders_wrongcolor {
+	color: #6862f1;
+}
+
+.orders_wrongcolor a {
+	color: black;
+}

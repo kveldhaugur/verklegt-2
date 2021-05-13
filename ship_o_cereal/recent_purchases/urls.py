@@ -3,6 +3,6 @@ from . import views
 
 urlpatterns = [
     # http://localhost:8000/recent_purchases
-    path('', views.index, name='index')
+    path('', views.index, name='purchases_index')
 ]
 
