@@ -27,7 +27,8 @@ def index(request):
             context['total_items'] = i
             if cart.Promo is not None:
                 context['promo_name'] = cart.Promo.Name
-                context['promo_val'] = 1 + cart.Promo.Discount
+                context['promo_val'] = int(round(cart.Promo.Discount*100))
+                context['total'] = round((total_price * (1 - cart.Promo.Discount)), 2)
             else:
                 context['promo_name'] = None
                 context['promo_val'] = 1
