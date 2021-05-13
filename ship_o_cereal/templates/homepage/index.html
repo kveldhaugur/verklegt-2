@@ -4,6 +4,12 @@
     <div class="text-before-product">
         <span>Daily Deals</span>
     </div>
+    <div class="items">
+            {% for Item in daily_deals %}
+                {% include 'catalogue/Items.html' with item=Item %}
+
+            {% endfor %}
+        </div>
 
 
 
@@ -12,8 +18,8 @@
         <span>Popular items</span>
     </div>
     <div class="items">
-        {% for Item in Items %}
-            {% include 'homepage/single_item.html' with Item=Item %}
+        {% for Item in popular %}
+            {% include 'catalogue/Items.html' with item=Item %}
         {% endfor %}
     </div>
 

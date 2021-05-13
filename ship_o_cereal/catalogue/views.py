@@ -30,7 +30,7 @@ def index(request):
         }
     if 'filter-by' in request.POST:
         filter_filter = request.POST['filter-by']
-        if 'recentSearch' in request.POST and request.POST['recentSearch'] is not '':
+        if 'recentSearch' in request.POST and request.POST['recentSearch'] != '':
             items = Items.objects.filter(Name__icontains=request.POST['recentSearch'])
         else:
             items = Items.objects.all()
@@ -49,9 +49,9 @@ def get_tags(request):
     # if 'search_filter' in request.GET:
     #     search_filter = request.GET['search_filter'] ## remove #'s if somethings fucky
     items = Items.objects.all()
-    if request.GET['recentSearch'] is not '':
+    if request.GET['recentSearch'] != '':
         items = items.filter(Name__icontains=request.GET['recentSearch'])
-    if request.GET['recentTag'] is not '':
+    if request.GET['recentTag'] != '':
         tag = ItemCategory.objects.get(CategoryTag=request.GET['recentTag'])
         items = items.filter(Tags=tag)
     for x in items:
@@ -72,7 +72,7 @@ def get_tags(request):
 def add_to_history(session, searchstr):
     if session.session_key == None:
         session.create()
-    if searchstr != "" and searchstr is not None:
+    if searchstr != "" and searchstr != None:
         key = session.session_key
         user_sesh = Session.objects.get(session_key=key)
         try:
