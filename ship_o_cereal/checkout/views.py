@@ -100,6 +100,7 @@ def validate_payment(post):
 
 
 def validate_user(user_info):
+    # TODO: phone & ssn & city are yet to be validated
     if user_info['FirstName'].isalpha() == False:
         return False, 'firstname contains bad chars'
     if user_info['LastName'].isalpha() == False:
@@ -153,24 +154,35 @@ def create_order(request):
     cart = ShoppingCart.objects.get(SessionID=request.session.session_key)
     itemsincart = cart.ItemsInCart.all()
     order_items = []
+    total_price = 0
     for item in itemsincart:
-        product = Items.objects.get(ItemID=item.ItemID)
+        product = Items.objects.get(ItemID=item.ItemID_id)
         order_item = OrderContains(Quantity=item.Quantity, ItemID=product)
+        product.Quantity_available -= item.Quantity
+        total_price += item.Quantity * product.Price
+        product.save()
         order_item.save()
         order_items.append(order_item)
-    if request.user.is_authenticated():
-        user = User.models.get(id=request.user.id)
+    if cart.Promo is not None:
+        total_price = round((total_price * (1 - cart.Promo.Discount)),2)
+    if request.user.is_authenticated:
+        user = User.objects.get(id=request.user.id)
         try: # to get user info
             shippinginfo = UserInfo.objects.get(AccountConnected=user)
         except UserInfo.DoesNotExist:
             shippinginfo = create_shipping_info(request.POST, user=user)
     else:
         shippinginfo = create_shipping_info(request.POST, user=None)
-    order = Order(ShippingInfoID=shippinginfo, TotalPrice=request.POST['total']) # 'total' may be subject to change
+    order = Order(ShippingInfoID=shippinginfo, TotalPrice=total_price) # 'total' may be subject to change
+    order.save()
     for item in order_items:
         order.ItemsInOrder.add(item)
     order.save()
-    
+    #delete from cart
+    for item in itemsincart:
+        cart.ItemsInCart.remove(item)
+        item.delete()
+    cart.delete()
 
 
 
@@ -179,7 +191,7 @@ def create_shipping_info(post, user=None):
     shippinginfo = UserInfo(
         AccountConnected=user,
         FirstName=post['FirstName'],
-        LastName=POST['LastName'],
+        LastName=post['LastName'],
         City=post['City'],
         PostalCode=post['PostalCode'],
         Address=post['Address'],

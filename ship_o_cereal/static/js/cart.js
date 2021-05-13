@@ -4,7 +4,12 @@ for(var i = 0; i < updateBtns.length; i++) {
     updateBtns[i].addEventListener('click', function() {
         var ItemID = this.dataset.item
         var action = this.dataset.action
-        var quantity = this.dataset.quantity
+        if (this.name === 'intfield') {
+            var quantity = document.getElementById('add-to-cart-amount-btn').value
+        }
+        else {
+            var quantity = this.dataset.quantity
+        }
         console.log('ItemID', ItemID, 'action', action, 'quantity', quantity)
 
         console.log('USER', user)
@@ -37,6 +42,10 @@ function promoCodeValidation() {
         })
         .then((data) =>{
             console.log('data', data)
+            var varia = window.location.href.split('/')
+            if (varia[varia.length-2] == "cart") {
+                window.location.reload()
+            }
         })
 }
 

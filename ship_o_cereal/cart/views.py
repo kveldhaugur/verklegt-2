@@ -11,8 +11,14 @@ def index(request):
         try:
             cart = ShoppingCart.objects.get(SessionID=request.session.session_key)
         except ShoppingCart.DoesNotExist:
-            cart = None
-        if cart is not None:
+            cart = get_or_create_cart(request.session)
+        if cart.Promo is not None:
+            context['promo_name'] = cart.Promo.Name
+            context['promo_val'] = int(cart.Promo.Discount*100)
+        else:
+            context['promo_name'] = None
+            context['promo_val'] = 1
+        if cart.ItemsInCart.exists():
             cart_contains = cart.ItemsInCart.all()
             items = []
             total_price = 0
@@ -25,20 +31,12 @@ def index(request):
             context['items_in_cart'] = items
             context['total'] = total_price
             context['total_items'] = i
-            if cart.Promo is not None:
-                context['promo_name'] = cart.Promo.Name
-                context['promo_val'] = int(round(cart.Promo.Discount*100))
-                context['total'] = round((total_price * (1 - cart.Promo.Discount)), 2)
-            else:
-                context['promo_name'] = None
-                context['promo_val'] = 1
             return render(request, 'cart/index.html', context)
     else:
         request.session.create()
     context['items_in_cart'] = None
     context['message'] = "Your cart contains no items, try adding some to the cart"
     return render(request, 'cart/index.html', context)
-
 
 def activate_promo(request):
     data = json.loads(request.body)
@@ -47,10 +45,13 @@ def activate_promo(request):
     price = data['total_price']
     try:
         promo = PromoCodes.objects.get(Name=promo_name)
-        cart = ShoppingCart.objects.get(SessionID=request.session.session_key)
+        cart = get_or_create_cart(request.session)
         cart.Promo = promo
         cart.save()
-        total_after_promo = round(int(price) - int(price) * promo.Discount, 2)
+        if not price.isdigit():
+            total_after_promo = 0
+        else:
+            total_after_promo = round(int(price) - int(price) * promo.Discount, 2)
 
     except PromoCodes.DoesNotExist:
         return JsonResponse({
@@ -111,10 +112,11 @@ def update_item(request):
 
 
 def get_or_create_cart(customer):
+    session = Session.objects.get(session_key=customer.session_key)
     try:
-        cart = ShoppingCart.objects.get(SessionID=customer.session_key)
+        cart = ShoppingCart.objects.get(SessionID=session)
     except ShoppingCart.DoesNotExist:
-        cart = ShoppingCart(SessionID=customer)
+        cart = ShoppingCart(SessionID=session)
         cart.save()
     return cart
 
