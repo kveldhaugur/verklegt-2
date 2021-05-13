@@ -118,7 +118,7 @@ def validate_user(user_info):
 
 
 def validate_cc(credit_info):
-    if credit_info['CCName'].isalpha() == False:
+    if credit_info['CCName'].replace(' ', '').isalpha() == False:
         return False, 'CCName contains bad chars'
     if validate_creditcard(credit_info['CCNum']) == False:
         return False, 'bad creditcard number'
@@ -131,7 +131,7 @@ def validate_cc(credit_info):
             year, month = str(datetime.datetime.today()).split(' ')[0].split('-')[0:2]
             year = int(year)
             month = int(month)
-            if cardyear > year:
+            if cardyear >= year:
                 return True, 'card validated'
             elif cardyear == year:
                 if cardmonth >= month:
