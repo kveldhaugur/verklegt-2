@@ -9,7 +9,7 @@
             <br>
             <div class="product-name-price">
                 <h1>{{ item.Name }}</h1>
-                <p>${{ item.Price }}</p>
+                <p>{{ item.Price }} kr.</p>
                 <div class="cart-adder">
                     <input type="number" class="form-fill" id="add-to-cart-amount-btn" placeholder="Amount">
                     <button data-quantity="1" data-item={{item.ItemID}} data-action="add" name="intfield" class="add-to-cart-btn update-cart">Set quantity in cart</button>
