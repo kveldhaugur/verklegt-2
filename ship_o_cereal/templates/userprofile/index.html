@@ -32,15 +32,15 @@
                 <p>Country: {{ data.country }}</p>
             {% endif %}
         </div>
-        <div class="search-history-btn">
-            <button class="profile-btn">Search history</button>
-        </div>
+        <form action="{% url 'index' %}">
+            <input type="submit" value="My purchases" class="profile-btn">
+        </form>
     </div>
     <div class="user-info-buttons-below">
         <form action="{% url 'edit-profile-index' %}">
             <input type="submit" value="Edit profile" class="profile-btn">
         </form>
-        <button class="profile-btn">My purchases</button>
+
         <form action="{% url 'logout-index' %}">
             <input type="submit" value="Logout" class="profile-btn">
         </form>

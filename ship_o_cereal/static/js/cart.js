@@ -67,11 +67,17 @@ function updateUserOrder(ItemID, action, quantity) {
     })
     .then((data) =>{
         console.log('data', data)
+
     })
     .then((data) => {
         var varia = window.location.href.split('/')
         if (varia[varia.length-2] == "cart") {
             window.location.reload()
+        } else {
+            document.getElementById('add-alert').innerHTML = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Added!</strong> You can view the item in the shopping cart.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`
         }
     })
 }

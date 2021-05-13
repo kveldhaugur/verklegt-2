@@ -38,7 +38,6 @@ def index(request):
     context['message'] = "Your cart contains no items, try adding some to the cart"
     return render(request, 'cart/index.html', context)
 
-
 def activate_promo(request):
     data = json.loads(request.body)
     print(request.body)
