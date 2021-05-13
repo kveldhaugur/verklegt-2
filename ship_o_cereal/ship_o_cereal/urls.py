@@ -29,4 +29,5 @@ urlpatterns = [
     path('userprofile/', include('userprofile.urls')),
     path('productinfo/', include('productinfo.urls')),
     path('user/', include('user.urls')),
+    path('recent_purchases/',include('recent_purchases.urls')),
 ]
