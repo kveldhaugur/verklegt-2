@@ -12,6 +12,12 @@ def index(request):
             cart = ShoppingCart.objects.get(SessionID=request.session.session_key)
         except ShoppingCart.DoesNotExist:
             cart = get_or_create_cart(request.session)
+        if cart.Promo is not None:
+            context['promo_name'] = cart.Promo.Name
+            context['promo_val'] = int(round((1 + cart.Promo.Discount)*10))
+        else:
+            context['promo_name'] = None
+            context['promo_val'] = 1
         if cart.ItemsInCart.exists():
             cart_contains = cart.ItemsInCart.all()
             items = []
@@ -25,12 +31,6 @@ def index(request):
             context['items_in_cart'] = items
             context['total'] = total_price
             context['total_items'] = i
-            if cart.Promo is not None:
-                context['promo_name'] = cart.Promo.Name
-                context['promo_val'] = 1 + cart.Promo.Discount
-            else:
-                context['promo_name'] = None
-                context['promo_val'] = 1
             return render(request, 'cart/index.html', context)
     else:
         request.session.create()

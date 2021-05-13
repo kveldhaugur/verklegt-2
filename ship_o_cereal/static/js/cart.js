@@ -42,6 +42,10 @@ function promoCodeValidation() {
         })
         .then((data) =>{
             console.log('data', data)
+            var varia = window.location.href.split('/')
+            if (varia[varia.length-2] == "cart") {
+                window.location.reload()
+            }
         })
 }
 
