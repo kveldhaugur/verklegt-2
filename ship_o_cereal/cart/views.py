@@ -14,7 +14,7 @@ def index(request):
             cart = get_or_create_cart(request.session)
         if cart.Promo is not None:
             context['promo_name'] = cart.Promo.Name
-            context['promo_val'] = int(round((1 + cart.Promo.Discount)*10))
+            context['promo_val'] = int(cart.Promo.Discount*100)
         else:
             context['promo_name'] = None
             context['promo_val'] = 1
