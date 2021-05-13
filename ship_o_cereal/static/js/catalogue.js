@@ -80,6 +80,8 @@ $(document).ready(function() {
                 // TODO Show toaster
                 console.error(error);
             }
+        }).then((response) =>{
+            addCartListeners();
         })
     });
 });
@@ -157,6 +159,9 @@ $(document).ready(function() {
                 console.error(error);
             }
         })
+        .then((response) =>{
+            addCartListeners();
+        })
     });
 });
 
@@ -207,5 +212,8 @@ function performAjax (searchText) {
                 // TODO Show toaster
                 console.error(error);
             }
-        });
+        })
+    .then((response) =>{
+            addCartListeners();
+        })
 };

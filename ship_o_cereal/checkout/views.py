@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from main.models import UserInfo, Country, UserImage, ShoppingCart, PromoCodes, Order, OrderContains, Items
@@ -165,6 +165,10 @@ def create_order(request):
         product.Quantity_available -= item.Quantity
         total_price += item.Quantity * product.Price
         product.save()
+        if cart.Promo is not None:
+            order_item.Price = round((product.Price * (1 - cart.Promo.Discount)), 2)
+        else:
+            order_item.Price = product.Price
         order_item.save()
         order_items.append(order_item)
     if cart.Promo is not None:
@@ -223,17 +227,26 @@ def receipt(request, id):
         order = Order.objects.get(id=id, AccountConnected=user)
     except Session.DoesNotExist:
         # gtfo, no business here
-        return render(request, 'homepage/index.html')
+        return redirect("homepage-index")
     except User.DoesNotExist:
         # try to get from session instead
         try:
             order = Order.objects.get(id=id, SessionConnected=session)
         except Order.DoesNotExist:
             # request doesnt have the right session or the account, so go to homepage jail
-            return render(request, 'homepage/index.html')
+            return redirect("homepage-index")
     except Order.DoesNotExist:
-        return render(request, 'homepage/index.html')
+        return redirect("homepage-index")
     context['order'] = order
     context['days_left'] = (datetime.datetime.now() + datetime.timedelta(days=7) - datetime.datetime.now()).days
+    context['shipping'] = order.ShippingInfoID
+    itemsinorder = order.ItemsInOrder.all()
+    items = []
+    total_items = 0
+    for item in itemsinorder:
+        items.append((item.Quantity, item.Price, item.ItemID_id))
+        total_items += item.Quantity
+    context['items'] = items
+    context['total_items'] = total_items
     return render(request, 'checkout/receipt.html', context)
     # order.doesnotexist shouldnt happen because get_object_or_404 will take care of that
