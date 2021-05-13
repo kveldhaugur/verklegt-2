@@ -86,6 +86,7 @@ class ShoppingCart(models.Model):
 class OrderContains(models.Model):
     ItemID = models.ForeignKey(Items, on_delete=models.PROTECT)
     Quantity = models.IntegerField(null=False)
+    Price = models.FloatField(null=False, default=0)
 
 
 class Order(models.Model): #has id

@@ -1,7 +1,67 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<p>Date purchased: {{ order.DatePurchased }}</p>
+<p>You should expect the order to arrive in {{ days_left }} days.</p>
+<p>Shipping will be sent to:</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Country</th>
+      <th scope="col">City</th>
+      <th scope="col">Postal</th>
+      <th scope="col">Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ shipping.FirstName }}</td>
+      <td>{{ shipping.LastName }}</td>
+      <td>{{ shipping.Country }}</td>
+      <td>{{ shipping.City }}</td>
+      <td>{{ shipping.PostalCode }}</td>
+      <td>{{ shipping.Address }} {{ shipping.HouseNum }}</td>
+    </tr>
+  </tbody>
+</table>
 
-{{ order }}
+<p>Updates about the order will be sent to you via</p>
+<p>Email: {{ shipping.Email }}</p>
+<p>Phone: {{ shipping.MobilePhone }}</p>
+<br>
+<h2>Order information</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#Item</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        {% for quantity, price, item in items %}
+      <td>{{ forloop.counter }}</td>
+      <td>{{ quantity }}x</td>
+      <td>{{ item.Name }}</td>
+      <td>{{ price }} kr.</td>
+      <td>{% widthratio price 1 quantity %} kr.</td>
+        {% endfor %}
+        <br>
+        <td>Total</td>
+        <td>{{ total_items }}</td>
+        <td></td>
+        <td></td>
+        <td>{{ order.TotalPrice }}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+{{ shipping.FirstName }}
 
 {% endblock %}
