@@ -33,7 +33,7 @@ urlpatterns = [
 ]
 
 handler404 = 'ship_o_cereal.views.error_404'
-#handler500 = 'ship_o_cereal.views.error_500'
+handler500 = 'ship_o_cereal.views.error_500'
 handler403 = 'ship_o_cereal.views.error_403'
 handler400 = 'ship_o_cereal.views.error_400'
 
