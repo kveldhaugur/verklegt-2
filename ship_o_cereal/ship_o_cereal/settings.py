@@ -15,6 +15,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$lk=a-6&20sr29m+u4gwc0&her70_&lrj736w-50f-qj9*0x$c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ship_o_cereal',
     'main.apps.MainConfig',
     'homepage.apps.HomepageConfig',
     'cart.apps.CartConfig',
@@ -47,7 +49,6 @@ INSTALLED_APPS = [
     'aboutus.apps.AboutusConfig',
     'checkout.apps.CheckoutConfig',
     'userprofile.apps.UserprofileConfig',
-    'productinfo.apps.ProductinfoConfig',
     'user.apps.UserConfig'
 ]
 
@@ -66,7 +67,7 @@ ROOT_URLCONF = 'ship_o_cereal.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [TEMPLATE_DIR, ]
         ,
         'APP_DIRS': True,
         'OPTIONS': {

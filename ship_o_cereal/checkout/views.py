@@ -245,4 +245,3 @@ def receipt(request, id):
     context['items'] = items
     context['total_items'] = total_items
     return render(request, 'checkout/receipt.html', context)
-    # order.doesnotexist shouldnt happen because get_object_or_404 will take care of that

@@ -57,9 +57,6 @@ def index(request):
 
 def get_tags(request):
     items_lis = []
-    # search_filter = ""
-    # if 'search_filter' in request.GET:
-    #     search_filter = request.GET['search_filter'] ## remove #'s if somethings fucky
     items = Items.objects.all()
     if request.GET['recentSearch'] != '':
         items = items.filter(Name__icontains=request.GET['recentSearch'])
