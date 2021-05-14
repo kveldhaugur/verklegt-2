@@ -9,3 +9,10 @@ Allar kröfur uppfylltar á rubricinu, en aukalega er:
 	með ekkert search er samt hægt að raða results frá því að filtera Tags og raða eftir verð eða stafróf,
 	Promo codes, með afslætti fyrir allar vörur ef þú slærð hann inn í cartið fyrir checkout, (prófaðu CELEBDISCOUNT1),
 	Receipt sýnir bæði verð fyrir hverja vöru (eftir discount) og samanlagt verð fyrir hverja vöru, og loks samanlagt verð fyrir allar vörur,
+
+pakkar notaðir (pip install)
+
+psycopg2-bonary
+django
+
+notuðum bootstrap í sumum hlutum sem koma með í verkefninu
