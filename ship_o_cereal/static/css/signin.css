@@ -1,5 +1,9 @@
 .sign-in-form {
     text-align: center;
+    align-self: center;
+    align-content: center;
+    align-items: center;
+    position: center;
 }
 
 .form-input {
@@ -30,16 +34,22 @@
     padding-right: 2rem;
     border-radius: 25px;
     font-weight: bolder;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 .signin-text {
     margin-top: 7rem;
     font-weight: bolder;
+    text-align: center;
 }
 
 #text-for-sign-up {
     margin-top: 0.5rem;
     font-size: smaller;
+    text-align: center;
 }
 
 #sign-up-clicker {
@@ -60,4 +70,9 @@
     max-width: 18rem;
     margin: 0 auto;
 
+}
+
+.form-signin {
+    align-items: center;
+    align-content: center;
 }
