@@ -28,7 +28,12 @@ urlpatterns = [
     path('aboutus/', include('aboutus.urls')),
     path('checkout/', include('checkout.urls')),
     path('userprofile/', include('userprofile.urls')),
-    path('productinfo/', include('productinfo.urls')),
     path('user/', include('user.urls')),
     path('recent_purchases/',include('recent_purchases.urls')),
 ]
+
+handler404 = 'ship_o_cereal.views.error_404'
+#handler500 = 'ship_o_cereal.views.error_500'
+handler403 = 'ship_o_cereal.views.error_403'
+handler400 = 'ship_o_cereal.views.error_400'
+

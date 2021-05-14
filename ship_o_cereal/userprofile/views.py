@@ -98,22 +98,3 @@ def get_image(id):
     except UserImage.DoesNotExist:
         image = None
     return image
-
-
-#def signin(request):
-#    context= {}
-#    if request.method == "POST":
-#        form = LoginUserForm(request, data=request.POST)
-#        if form.is_valid():
-#            username = form.cleaned_data.get('username')
-#            password = form.cleaned_data.get('password')
-#            user = authenticate(username=username, password=password)
-#            if user is not None:
-#                login(request, user)
-#                messages.info(request, f"You are now logged in as {username}.")
-#                return redirect("homepage-index")
-#        messages.error(request, "Invalid username or password.")
-#    else:
-#        form = LoginUserForm()
-#    context["signin_form"] = form
-#    return render(request, 'signin/index.html', context=context)
