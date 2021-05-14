@@ -78,7 +78,7 @@
 
                 <div class="col-12">
                   <label for="phone" class="form-label">Mobile Phone Number <span class="text-muted"></span></label>
-                  <input type="phone" class="form-control" id="phone" placeholder="1234567" value="{{data.MobilePhone}}" name="MobilePhone">
+                  <input type="phone" class="form-control" id="phone" placeholder="1234567" value="{{data.mobilephone}}" name="MobilePhone">
                   <div class="invalid-feedback">
                     Please enter a valid phone number for shipping updates.
                   </div>
@@ -86,7 +86,7 @@
 
                 <div class="col-12">
                   <label for="city" class="form-label">City</label>
-                  <input type="text" class="form-control" id="city" value="{{data.address}}" placeholder="Reykjavik" required="" name="City">
+                  <input type="text" class="form-control" id="city" value="{{data.city}}" placeholder="Reykjavik" required="" name="City">
                   <div class="invalid-feedback">
                     Please enter your shipping city.
                   </div>
@@ -136,7 +136,9 @@
                   </div>
                 </div>
               </div>
-
+              {% for key, value in erroruser.items %}
+                <p style="color: #dc3545">{{ value }}</p>
+              {% endfor %}
               <hr class="my-4">
               <h4 class="mb-3">Payment</h4>
 
@@ -193,6 +195,9 @@
                     Security code required
                   </div>
                 </div>
+                {% for key, value in errorcc.items %}
+                <p style="color: #dc3545">{{ value }}</p>
+                {% endfor %}
               </div>
 
               <hr class="my-4">

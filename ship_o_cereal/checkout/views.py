@@ -13,13 +13,14 @@ def index(request):
         # validate user and creditcard
         result, message = validate_payment(request.POST)
         if result:
-            #throw it all into an order
+            # throw it all into an order
             order_id = create_order(request)
-            return receipt(request, order_id)#confirmation page goes here
+            return receipt(request, order_id) # receipt page goes here
+        else:
+            context['erroruser'] = message['user']
+            context['errorcc'] = message['cc']
 
-    context = {
-        'data': None
-    }
+    context['data'] = None
     try:
         usrdata = UserInfo.objects.get(AccountConnected=request.user.id)
         info = {
@@ -70,7 +71,7 @@ def index(request):
             if cart.Promo is not None:
                 context['promo_name'] = cart.Promo.Name
                 context['promo_val'] = int(round(cart.Promo.Discount*100))
-                context['total'] = round((total_price * (1 - cart.Promo.Discount)),2)
+                context['total'] = int(round((total_price * (1 - cart.Promo.Discount))))
             else:
                 context['promo_name'] = None
                 context['total'] = total_price
@@ -84,46 +85,70 @@ def index(request):
 def validate_payment(post):
     credit_info = {}
     user_info = {}
+    message = {}
     for item in post:
         if item[0:2] == 'CC':
             credit_info[item] = post[item]
         else:
             user_info[item] = post[item]
-    val_bool, message = validate_user(user_info)
-    if val_bool == False:
-        return False, message
-    val_bool, message = validate_cc(credit_info)
+    val_bool, message['user'] = validate_user(user_info)
+    val_bool, message['cc'] = validate_cc(credit_info)
     if val_bool == False:
         return False, message
     return True, 'Validation successful'
 
 
 def validate_user(user_info):
-    # TODO: phone & ssn & city are yet to be validated
-    if user_info['FirstName'].replace(' ', '').isalpha() == False:
-        return False, 'firstname contains bad chars'
-    if user_info['LastName'].replace(' ', '').isalpha() == False:
-        return False, 'lastname contains bad chars'
+    # TODO: phone &  & city are yet to be validated
+    valid = True
+    message = {}
+    if user_info['City'].replace(' ', '').isalpha() is False:
+        valid = False
+        message['City'] = 'City name must contain only letters'
+    if user_info['SSN'].replace(' ', '').replace('-', '').isdigit() is False:
+        valid = False
+        message['SSN'] = 'Your social security number has to be a number, 10 digit long'
+    if user_info['MobilePhone'].replace(' ', '').replace('-', '').isdigit() is False:
+        valid = False
+        message['MobilePhone'] = 'Mobile phone must be a number'
+    if user_info['FirstName'].replace(' ', '').isalpha() is False:
+        valid = False
+        message['FirstName'] = 'Firstname has to be letters only'
+    if user_info['LastName'].replace(' ', '').isalpha() is False:
+        valid = False
+        message['LastName'] = 'Lastname has to be letters only'
     email_regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
-    if (re.search(email_regex, user_info['Email'])) == False:
-        return False, 'email was not valid'
-    if user_info['Address'].replace(' ', '').isalpha() == False:
-        return False, 'address contains bad chars'
-    if user_info['HouseNum'].isdigit() == False:
-        return False, 'housenum is not a number'
+    if (re.search(email_regex, user_info['Email'])) is False:
+        valid = False
+        message['Email'] = 'Email was not valid'
+    if user_info['Address'].replace(' ', '').isalpha() is False:
+        valid = False
+        message['Address'] = 'Address has to be letters only (house number is separated)'
+    if user_info['HouseNum'].isdigit() is False:
+        valid = False
+        message['HouseNum'] = 'House number is not a number'
     # No need to check country, because its selection only
-    if user_info['PostalCode'].isdigit() == False:
-        return False, 'ZIP/postal code is not a number'
-    return True, 'user info validated'
+    if user_info['PostalCode'].isdigit() is False:
+        valid = False
+        message['PostalCode'] = 'ZIP/postal code is not a number'
+    if valid:
+        return valid, 'user info validated'
+    else:
+        return valid, message
 
 
 def validate_cc(credit_info):
-    if credit_info['CCName'].replace(' ', '').isalpha() == False:
-        return False, 'CCName contains bad chars'
-    if validate_creditcard(credit_info['CCNum']) == False:
-        return False, 'bad creditcard number'
-    if (credit_info['CCsecnum'].isdigit() == False) or ((len(credit_info['CCsecnum']) == 3) == False):
-        return False, 'bad security number'
+    valid = True
+    message = {}
+    if credit_info['CCName'].replace(' ', '').isalpha() is False:
+        valid =  False
+        message['CCName'] = 'Credit Card Name contains bad chars'
+    if validate_creditcard(credit_info['CCNum']) is False:
+        valid = False
+        message['CCNum'] = 'bad creditcard number'
+    if (credit_info['CCsecnum'].isdigit() is False) or ((len(credit_info['CCsecnum']) == 3) is False):
+        valid = False
+        message['CCsecnum'] = 'bad security number'
     if credit_info['CCexpM'].isdigit():
         if credit_info['CCexpY'].isdigit():
             cardyear = int(credit_info['CCexpY'])
@@ -132,11 +157,12 @@ def validate_cc(credit_info):
             year = int(year)
             month = int(month)
             if cardyear >= year:
-                return True, 'card validated'
+                return valid, message
             elif cardyear == year:
                 if cardmonth >= month:
-                    return True, 'card validated'
-    return False, 'bad cc expiry date'
+                    return valid, message
+    message['CCexp'] = 'Credit card expiry date must be a number and it cannot be already expired'
+    return False, message
 
 
 def validate_creditcard(cardnum):
@@ -168,7 +194,7 @@ def create_order(request):
         order_item.save()
         order_items.append(order_item)
     if cart.Promo is not None:
-        total_price = round((total_price * (1 - cart.Promo.Discount)),2)
+        total_price = int(round((total_price * (1 - cart.Promo.Discount))))
     if request.user.is_authenticated:
         user = User.objects.get(id=request.user.id)
         try: # to get user info
