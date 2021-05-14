@@ -103,6 +103,7 @@ def get_item_by_id(request, id):
     retItem = {
         'ItemID': item.ItemID,
         'Name': item.Name,
+        'Manufacturer': item.ManID,
         'Description': item.Description,
         'Image': item.Image,
         'Price': item.Price,
